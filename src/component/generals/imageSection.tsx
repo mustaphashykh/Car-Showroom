@@ -27,7 +27,8 @@ const ImageSection = () => {
     const scrollImage = () => {
         if (imageRef.current) {
             imageRef.current.scrollIntoView({
-                behavior: 'smooth'
+                behavior: 'smooth',
+                block: 'end'
             })
         }
     }
