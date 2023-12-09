@@ -7,7 +7,7 @@ const Preparation = () => {
                     <Heading heading="Preparation" />
                     <Border />
                 </div>
-                <ul className="py-3 pl-4 list-disc">
+                <ul className="pt-3 pl-4 list-disc">
                     <li>
                         2 keys Present
                     </li>
