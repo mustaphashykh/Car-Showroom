@@ -1,7 +1,14 @@
+import { Footer, Header } from "./component/commons"
+import { ProductPage } from "./component/pages"
+
 function App() {
   return (
-    <div className="text-3xl font-bold underline">
-      <div>This is React Vite App.</div>
+    <div className="w-full md:max-w-sm min-h-screen mx-auto text-gray-900">
+      <Header />
+      <div className="py-8">
+        <ProductPage />
+      </div>
+      <Footer />
     </div>
   )
 }
