@@ -1,3 +1,4 @@
+import { Footer } from "../commons";
 import { HeroSection, ImageSection, InfoSection, KeyInfo, Preparation, ServiceHistory, Specification } from "../generals";
 
 const ProductPage = () => {
@@ -10,6 +11,7 @@ const ProductPage = () => {
             <Specification />
             <ServiceHistory />
             <Preparation />
+            <Footer />
         </div>
     )
 }

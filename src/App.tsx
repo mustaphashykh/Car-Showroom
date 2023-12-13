@@ -1,14 +1,18 @@
 import { Footer, Header } from "./component/commons"
-import { ProductPage } from "./component/pages"
+import { CompletionPage, KeyInfoPage, PricePage, ProductPage, ServiceHistoryPage, SpecificationPage } from "./component/pages"
 
 function App() {
   return (
     <div className="w-full md:max-w-sm min-h-screen mx-auto text-gray-900">
       <Header />
-      <div className="py-8">
+      <div className="pt-8">
         <ProductPage />
+        {/* <KeyInfoPage/> */}
+        {/* <SpecificationPage/> */}
+        {/* <ServiceHistoryPage/> */}
+        {/* <PricePage/> */}
+        {/* <CompletionPage/> */}
       </div>
-      <Footer />
     </div>
   )
 }
