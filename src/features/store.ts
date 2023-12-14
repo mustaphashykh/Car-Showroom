@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { reviloSlice } from "./slice";
 
-export const shopFusionStore = configureStore({
+export const Store = configureStore({
   reducer: reviloSlice.reducer,
 });
 
-export type RootState = ReturnType<typeof shopFusionStore.getState>
+export type RootState = ReturnType<typeof Store.getState>
