@@ -3,7 +3,7 @@ import heading from '../../assets/heading.png'
 
 const Footer:React.FC<{absoute?: boolean}> = ({absoute}) => {
     return (
-        <div className={absoute ? 'pt-8 absolute bottom-0 w-full': 'pt-8'}>
+        <div className={absoute ? 'mt-8 absolute bottom-0 w-full': 'mt-8'}>
             <div className="bg-main-color text-white pt-2 pl-7 pb-4">
                 <img src={heading} className='w-40' alt="page-headings" />
                 <div className='text-[0.385rem] text-white pl-10 flex flex-col gap-0.5'>
