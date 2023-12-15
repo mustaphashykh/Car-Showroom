@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import { Footer, Header, LoadingScreen } from "./component/commons"
-import { CompletionPage, KeyInfoPage, Listing, LoginPage, PricePage, ProductPage, ServiceHistoryPage, SpecificationPage } from "./component/pages"
+import { Header, LoadingScreen } from "./component/commons"
+import { AboutCarPage, AllListingPage, CompletionPage, KeyInfoPage, Listing, LoginPage, PreparationPage, PricePage, ProductPage, ServiceHistoryPage, SpecificationPage } from "./component/pages"
 import { RootState } from "./features/store"
 import { Route, Routes } from "react-router-dom"
 
@@ -13,11 +13,15 @@ function App() {
       <div className="pt-8">
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/car-listing" element={<Listing />} />
+          <Route path="/all-listing" element={<AllListingPage />} />
           <Route path="/car-display/:id" element={<ProductPage />} />
           <Route path="/key-information" element={<KeyInfoPage />} />
+          <Route path="/about-car" element={<AboutCarPage />} />
           <Route path="/specifications" element={<SpecificationPage />} />
           <Route path="/service-history" element={<ServiceHistoryPage />} />
           <Route path="/price" element={<PricePage />} />
+          <Route path="/preparation" element={<PreparationPage />} />
           <Route path="/completion" element={<CompletionPage />} />
         </Routes>
       </div>
@@ -25,11 +29,4 @@ function App() {
   )
 }
 
-export default App
-{/* <Listing/> */}
-        {/* <ProductPage /> */}
-        {/* <KeyInfoPage/> */}
-        {/* <SpecificationPage/> */}
-        {/* <ServiceHistoryPage/> */}
-        {/* <PricePage/> */}
-        {/* <CompletionPage/> */}
+export default App;

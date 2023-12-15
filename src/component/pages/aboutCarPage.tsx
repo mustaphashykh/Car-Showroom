@@ -7,15 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/store";
 import { reviloActions } from "../../features/slice";
 
-const ServiceHistoryPage = () => {
-    const dispatch = useDispatch()
-    const serviceHistory = useSelector((state:RootState) => state.serviceHistory)
-    const [content, setContent] = useState(serviceHistory)
+const AboutCarPage = () => {
+    const aboutCar = useSelector((state:RootState) => state.aboutCar)
+    const [content,setContent] = useState(aboutCar)
+    const dispacth = useDispatch()
     const [showError, setShowError] = useState(false)
     const modules = {
         toolbar: [
-            ['bold', 'italic', 'underline'],
-            [{ 'list': 'bullet' }],
+            ['bold', 'italic', 'underline',],
+            [{ 'list': 'bullet' }],    
         ],
     };
     const navigate = useNavigate()
@@ -23,30 +23,30 @@ const ServiceHistoryPage = () => {
         if (!content.length) {
             setShowError(true)
         } else {
-            dispatch(reviloActions.setServiceHistory(content))
+            dispacth(reviloActions.setAboutCar(content))
             setShowError(false)
-            navigate('/price')
+            navigate('/specifications')
         }
     }
     return (
         <div>
             <div className="px-7">
                 <div>
-                    <Heading heading="Service History" />
+                    <Heading heading="About Car" />
                     <Border />
                 </div>
                 <div className="py-6">
                     <p className="text-[0.625rem]">
-                        step 4 of 7
+                        step 2 of 7
                     </p>
                     <div className="bg-[#D9D9D9] w-full rounded-full h-4 mt-2">
-                        <div className="bg-high-light-color w-[56%] h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
-                            <p>56%</p>
+                        <div className="bg-high-light-color w-[28%] h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
+                            <p>28%</p>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs font-bold pb-1">Enter your Service History below</p>
+                    <p className="text-xs font-bold pb-1">Enter your Specifications below</p>
                     <div className="text-[0.65rem]">
                         <ReactQuill value={content} onChange={setContent} modules={modules} />
                     </div>
@@ -54,7 +54,7 @@ const ServiceHistoryPage = () => {
                         showError && <p className="text-[0.45rem] text-red-600 pt-0.5">please fill some the specification.</p>
                     }
                 </div>
-                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4" onClick={() => navigate('/specifications')}>Previous</button>
+                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4" onClick={() => navigate('/key-information')}>Previous</button>
                 <br />
                 <button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2" onClick={navigateToNext}>Next</button>
             </div>
@@ -63,4 +63,4 @@ const ServiceHistoryPage = () => {
     )
 }
 
-export default ServiceHistoryPage;
+export default AboutCarPage;

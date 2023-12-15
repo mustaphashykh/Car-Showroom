@@ -1,8 +1,14 @@
 import { Formik, Form } from "formik";
 import * as Yup from 'yup';
 import { Border, Footer, Heading } from "../commons";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../features/store";
+import { reviloActions } from "../../features/slice";
 
 const PricePage = () => {
+    const dispatch = useDispatch()
+    const price = useSelector((state:RootState) => state.price)
     const validation = Yup.object({
         asking_price: Yup.string()
             .required('please fill the above field.'),
@@ -11,6 +17,8 @@ const PricePage = () => {
         autorader_retail: Yup.string()
             .required('please fill the above field.'),
     })
+    
+    const navigate = useNavigate()
     return (
         <div>
             <div className="px-7">
@@ -20,24 +28,24 @@ const PricePage = () => {
                 </div>
                 <div className="py-6">
                     <p className="text-[0.625rem]">
-                        step 4 of 5
+                        step 5 of 7
                     </p>
                     <div className="bg-[#D9D9D9] w-full rounded-full h-4 mt-2">
-                        <div className="bg-high-light-color w-4/5 h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
-                            <p>80%</p>
+                        <div className="bg-high-light-color w-[70%] h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
+                            <p>70%</p>
                         </div>
                     </div>
                 </div>
                 <Formik
                     initialValues={{
-                        asking_price: '',
-                        cap_clean: '',
-                        autorader_retail: '',
+                        asking_price: price.asking_price,
+                        cap_clean: price.cap_clean,
+                        autorader_retail: price.autorader_retail,
                     }}
                     validationSchema={validation}
-                    onSubmit={(values, { resetForm }) => {
-                        console.log(values);
-                        resetForm()
+                    onSubmit={(values) => {
+                        navigate('/preparation')
+                        dispatch(reviloActions.setPrice(values))
                     }}
                 >
                     {({ ...keyInfoForm }) => (
@@ -63,7 +71,7 @@ const PricePage = () => {
                                     <div className="text-[0.45rem] text-red-600">{keyInfoForm.errors.autorader_retail}</div>
                                 ) : null}
                             </div>
-                            <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2">Previous</button>
+                            <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2" onClick={()=> navigate('/service-history')}>Previous</button>
                             <br />
                             <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2">Next</button>
                         </Form>)}

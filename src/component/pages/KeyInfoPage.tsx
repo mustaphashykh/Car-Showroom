@@ -2,8 +2,14 @@ import { Formik, Form } from "formik";
 import * as Yup from 'yup';
 import { Border, Footer, Heading } from "../commons";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../features/store";
+import { reviloActions } from "../../features/slice";
 
 const KeyInfoPage = () => {
+    const keyInfo = useSelector((state:RootState) => state.keyInfo)
+    const dispatch = useDispatch()
     const imageUploadRef = useRef<HTMLInputElement>(null);
     const imageUploadHandler = () => {
         if (imageUploadRef.current) {
@@ -14,10 +20,11 @@ const KeyInfoPage = () => {
         images: Yup.array()
             .of(
                 Yup.mixed()
-                    .required("A file is required")
+                    .required("A file is required.")
             )
-            .required("At least one file is required")
-            .min(1, "Atleast one file is required"),
+            .required("At least one file is required.")
+            .max(4, "Can not upload more than 4 images.")
+            .min(1, "Atleast one file is required."),
         make: Yup.string()
             .required('please fill the above field.'),
         model: Yup.string()
@@ -31,6 +38,7 @@ const KeyInfoPage = () => {
         owners: Yup.string()
             .required('please fill the above field.'),
     })
+    const navigate = useNavigate()
     return (
         <div>
 
@@ -41,28 +49,28 @@ const KeyInfoPage = () => {
                 </div>
                 <div className="py-6">
                     <p className="text-[0.625rem]">
-                        step 1 of 5
+                        step 1 of 7
                     </p>
                     <div className="bg-[#D9D9D9] w-full rounded-full h-4 mt-2">
-                        <div className="bg-high-light-color w-1/5 h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
-                            <p>20%</p>
+                        <div className="bg-high-light-color w-[14%] h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
+                            <p>14%</p>
                         </div>
                     </div>
                 </div>
                 <Formik
                     initialValues={{
-                        make: '',
-                        model: '',
-                        variant: '',
-                        registration: '',
-                        mileage: '',
-                        owners: '',
-                        images: []
+                        make: keyInfo.make,
+                        model: keyInfo.model,
+                        variant: keyInfo.variant,
+                        registration: keyInfo.registration,
+                        mileage: keyInfo.mileage,
+                        owners: keyInfo.owners,
+                        images: keyInfo.images,
                     }}
                     validationSchema={validation}
-                    onSubmit={(values, { resetForm }) => {
-                        console.log(values);
-                        resetForm()
+                    onSubmit={(values) => {
+                        dispatch(reviloActions.setKeyInfo(values))
+                        navigate('/about-car')
                     }}
                 >
                     {({ setFieldValue, ...keyInfoForm }) => (

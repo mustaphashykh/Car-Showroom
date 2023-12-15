@@ -1,7 +1,8 @@
 import { Footer } from "../commons";
 import { HeroSection, ImageSection, InfoSection, KeyInfo, Preparation, ServiceHistory, Specification } from "../generals";
 
-const ProductPage = () => {
+const ProductPage: React.FC<{Preview?: boolean}> = ({Preview}) => {
+    console.log(Preview)
     return (
         <div className="text-[0.75rem]">
             <HeroSection />

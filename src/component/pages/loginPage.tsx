@@ -1,5 +1,6 @@
 import { Border, Footer, Heading } from "../commons";
 import { Formik, Form } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 
 const LoginPage = () => {
@@ -10,6 +11,7 @@ const LoginPage = () => {
         password: Yup.string()
             .required('please fill the above field.'),
     })
+    const navigate = useNavigate()
     return (
         <div>
             <div className="px-7">
@@ -26,6 +28,7 @@ const LoginPage = () => {
                     onSubmit={(values, { resetForm }) => {
                         console.log(values);
                         resetForm()
+                        navigate('/car-listing')
                     }}
                 >
                     {({ ...keyInfoForm }) => (
@@ -39,7 +42,7 @@ const LoginPage = () => {
                             </div>
                             <div className="pb-4">
                                 <label className="text-xs font-bold">Password</label>
-                                <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('password')} />
+                                <input type="password" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('password')} />
                                 {keyInfoForm.touched.password && keyInfoForm.errors.password ? (
                                     <div className="text-[0.45rem] text-red-600">{keyInfoForm.errors.password}</div>
                                 ) : null}
