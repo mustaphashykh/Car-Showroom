@@ -1,4 +1,5 @@
 export interface initialStateType {
+  id: string;
   userId: string,
   showLoader: boolean;
   keyInfo: {
@@ -16,3 +17,4 @@ export interface initialStateType {
   price: { asking_price: string; cap_clean: string; autorader_retail: string};
   preparation: string;
 }
+

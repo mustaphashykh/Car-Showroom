@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/store";
 import { reviloActions } from "../../features/slice";
+import axios from "axios";
 
 const KeyInfoPage = () => {
     const userId = useSelector((state: RootState) => state.userId)
@@ -13,20 +14,19 @@ const KeyInfoPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const fetchUser = async () => {
-        console.log('no user login')
-        // try {
-        //     const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`);
-        //     dispatch(reviloActions.setUser(data.user.userId));
-        // } catch (error) {
-        //     dispatch(reviloActions.resetUser())
-        //     navigate('/')
-        // }
+        try {
+            const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`, {withCredentials: true});
+            dispatch(reviloActions.setUser(data.user.userId));
+        } catch (error) {
+            dispatch(reviloActions.resetUser())
+            navigate('/')
+        }
     };
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-    }, [])
+    })
     const imageUploadRef = useRef<HTMLInputElement>(null);
     const imageUploadHandler = () => {
         if (imageUploadRef.current) {
@@ -37,11 +37,11 @@ const KeyInfoPage = () => {
         images: Yup.array()
             .of(
                 Yup.mixed()
-                    .required("A file is required.")
+                    .required("Atleast four files are required.")
             )
-            .required("At least one file is required.")
+            .required("Atleast four files are required.")
             .max(4, "Can not upload more than 4 images.")
-            .min(1, "Atleast one file is required."),
+            .min(4, "Atleast four files are required."),
         make: Yup.string()
             .required('please fill the above field.'),
         model: Yup.string()

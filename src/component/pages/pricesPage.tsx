@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/store";
 import { reviloActions } from "../../features/slice";
 import { useEffect } from "react";
+import axios from "axios";
 
 const PricePage = () => {
     const dispatch = useDispatch()
@@ -21,20 +22,19 @@ const PricePage = () => {
     const userId = useSelector((state: RootState) => state.userId)
     const navigate = useNavigate()
     const fetchUser = async () => {
-        console.log('no user login')
-        // try {
-        //     const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`);
-        //     dispatch(reviloActions.setUser(data.user.userId));
-        // } catch (error) {
-        //     dispatch(reviloActions.resetUser())
-        //     navigate('/')
-        // }
+        try {
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, {withCredentials: true});
+            dispatch(reviloActions.setUser(data.user.userId));
+        } catch (error) {
+            dispatch(reviloActions.resetUser())
+            navigate('/')
+        }
     };
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-    }, [])
+    })
     return (
         <div>
             <div className="px-7">

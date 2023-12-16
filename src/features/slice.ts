@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialStateType } from "./type";
 
 const initialState: initialStateType = {
-  userId: '',
+  id: "",
+  userId: "",
   showLoader: false,
   keyInfo: {
     make: "",
@@ -24,6 +25,12 @@ const initialState: initialStateType = {
   preparation: "",
 };
 
+const decodeHtml = (html: string) => {
+  const textArea = document.createElement('textarea');
+  textArea.innerHTML = html;
+  return textArea.value;
+};
+
 const reviloSlice = createSlice({
   name: "Revilo",
   initialState: initialState,
@@ -32,7 +39,7 @@ const reviloSlice = createSlice({
       state.userId = action.payload;
     },
     resetUser: (state) => {
-      state.userId = '';
+      state.userId = "";
     },
     showLoaderToogler: (state) => {
       state.showLoader = !state.showLoader;
@@ -67,27 +74,47 @@ const reviloSlice = createSlice({
       state.price.autorader_retail = autorader_retail;
     },
     reset: (state) => {
-        console.log(state.showLoader,state.keyInfo,state.specification,state.serviceHistory,state.aboutCar,state.price,state.preparation)
-        state.showLoader = false;
-        state.keyInfo = {
-            make: "",
-            model: "",
-            variant: "",
-            registration: "",
-            mileage: "",
-            owners: "",
-            images: [],
-        };
-        state.specification = "";
-        state.serviceHistory = "";
-        state.aboutCar = "";
-        state.price = {
-            asking_price: "",
-            cap_clean: "",
-            autorader_retail: "",
-        };
-        state.preparation = "";
-    }
+      state.showLoader = false;
+      state.keyInfo = {
+        make: "",
+        model: "",
+        variant: "",
+        registration: "",
+        mileage: "",
+        owners: "",
+        images: [],
+      };
+      state.specification = "";
+      state.serviceHistory = "";
+      state.aboutCar = "";
+      state.price = {
+        asking_price: "",
+        cap_clean: "",
+        autorader_retail: "",
+      };
+      state.preparation = "";
+    },
+    set: (state, action) => {
+      state.id = action.payload._id;
+      state.keyInfo = {
+        make: action.payload.make,
+        model: action.payload.model,
+        variant: action.payload.variant,
+        registration: action.payload.registration,
+        mileage: action.payload.mileage.toString(),
+        owners: action.payload.numberOfOwners.toString(),
+        images: [],
+      };
+      state.specification = decodeHtml(action.payload.specification);
+      state.serviceHistory = decodeHtml(action.payload.serviceHistory);
+      state.aboutCar = decodeHtml(action.payload.about);
+      state.price = {
+        asking_price: action.payload.askingPrice.toString(),
+        cap_clean: action.payload.capClean.toString(),
+        autorader_retail: action.payload.autoTraderDetail,
+      };
+      state.preparation = decodeHtml(action.payload.preparation);
+    },
   },
 });
 

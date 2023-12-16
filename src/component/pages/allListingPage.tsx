@@ -12,11 +12,17 @@ const AllListingPage = () => {
     const [products, setProducts] = useState([])
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const deleteProduct = async (id: string) => {
+        const response = await axios.delete(`http://localhost:5000/api/v1/products/${id}`, { withCredentials: true })
+        if(response.status === 200) {
+            getAllProducts()
+        }
+    }
     const getAllProducts = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v1/products', {withCredentials: true})
-            if(response) {
-                setProducts(response.data.data.products)
+            const response = await axios.get('http://localhost:5000/api/v1/products', { withCredentials: true })
+            if (response) {
+                setProducts(response.data.products)
             }
         } catch (error) {
             console.log(error)
@@ -24,8 +30,7 @@ const AllListingPage = () => {
     }
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, {withCredentials: true});
-            console.log(data.user.userId)
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -37,7 +42,7 @@ const AllListingPage = () => {
             fetchUser()
         }
         getAllProducts()
-    })
+    },[])
     return (
         <div>
             <div className="px-7">
@@ -49,13 +54,14 @@ const AllListingPage = () => {
                     <div className="text-[0.5rem] border-b-[1px] border-b-gray-400 flex justify-between text-gray-500">
                         <p>Name</p>
                         <div className="flex gap-3">
+                            <p>CopyURL</p>
                             <p>Edit</p>
                             <p>Delete</p>
                         </div>
                     </div>
                     <div className="pb-32">
                         {
-                            products.length ? <ProductCard /> : <p className="text-center text-high-light-color font-semibold text-sm pt-10">No product found</p>
+                            products.length ? products.map((item, idx) => <ProductCard key={idx} deleteProduct={deleteProduct} item={item} />) : <p className="text-center text-high-light-color font-semibold text-sm pt-10">No product found</p>
                         }
                     </div>
                 </div>

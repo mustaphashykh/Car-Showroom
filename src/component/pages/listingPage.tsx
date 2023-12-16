@@ -12,8 +12,7 @@ const Listing = () => {
     const navigate = useNavigate()
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`, {withCredentials: true});
-            console.log(data.user)
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -24,7 +23,7 @@ const Listing = () => {
         if (!userId) {
             fetchUser()
         }
-    },)
+    })
     return (
         <div>
             <div className="px-7">
@@ -32,7 +31,7 @@ const Listing = () => {
                     <Heading heading="Listings" />
                     <Border />
                 </div>
-                <div className="mt-12 flex items-center justify-between">
+                <div className="mt-12 flex items-center justify-evenly gap-4">
                     <div className="bg-[#D9D9D9] border-[1px] border-gray-400 text-sm text-gray-500 w-[9.5rem] rounded-lg h-14 flex items-center justify-center cursor-pointer" onClick={() => navigate('/key-information')}>
                         + add a new listing
                     </div>
