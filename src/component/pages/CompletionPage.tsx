@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Border, Footer, Heading } from "../commons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { reviloActions } from "../../features/slice";
+import { useEffect } from "react";
+import { RootState } from "../../features/store";
 
 const CompletionPage = () => {
     const navigate = useNavigate()
@@ -10,6 +12,22 @@ const CompletionPage = () => {
         navigate('/car-listing')
         dispatch(reviloActions.reset())
     }
+    const userId = useSelector((state: RootState) => state.userId)
+    const fetchUser = async () => {
+        console.log('no user login')
+        // try {
+        //     const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`);
+        //     dispatch(reviloActions.setUser(data.user.userId));
+        // } catch (error) {
+        //     dispatch(reviloActions.resetUser())
+        //     navigate('/')
+        // }
+    };
+    useEffect(() => {
+        if (!userId) {
+            fetchUser()
+        }
+    },)
     return (
         <div>
             <div className="px-7">

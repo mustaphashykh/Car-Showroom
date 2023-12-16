@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Border, Footer, Heading } from "../commons";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -8,6 +8,7 @@ import { RootState } from "../../features/store";
 import { reviloActions } from "../../features/slice";
 
 const AboutCarPage = () => {
+    const userId = useSelector((state: RootState) => state.userId)
     const aboutCar = useSelector((state:RootState) => state.aboutCar)
     const [content,setContent] = useState(aboutCar)
     const dispacth = useDispatch()
@@ -28,6 +29,21 @@ const AboutCarPage = () => {
             navigate('/specifications')
         }
     }
+    const fetchUser = async () => {
+        console.log('no user login')
+        // try {
+        //     const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`);
+        //     dispatch(reviloActions.setUser(data.user.userId));
+        // } catch (error) {
+        //     dispatch(reviloActions.resetUser())
+        //     navigate('/')
+        // }
+    };
+    useEffect(() => {
+        if (!userId) {
+            fetchUser()
+        }
+    }, [])
     return (
         <div>
             <div className="px-7">

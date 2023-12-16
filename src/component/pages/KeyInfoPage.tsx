@@ -1,15 +1,32 @@
 import { Formik, Form } from "formik";
 import * as Yup from 'yup';
 import { Border, Footer, Heading } from "../commons";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/store";
 import { reviloActions } from "../../features/slice";
 
 const KeyInfoPage = () => {
+    const userId = useSelector((state: RootState) => state.userId)
     const keyInfo = useSelector((state:RootState) => state.keyInfo)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const fetchUser = async () => {
+        console.log('no user login')
+        // try {
+        //     const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`);
+        //     dispatch(reviloActions.setUser(data.user.userId));
+        // } catch (error) {
+        //     dispatch(reviloActions.resetUser())
+        //     navigate('/')
+        // }
+    };
+    useEffect(() => {
+        if (!userId) {
+            fetchUser()
+        }
+    }, [])
     const imageUploadRef = useRef<HTMLInputElement>(null);
     const imageUploadHandler = () => {
         if (imageUploadRef.current) {
@@ -38,7 +55,6 @@ const KeyInfoPage = () => {
         owners: Yup.string()
             .required('please fill the above field.'),
     })
-    const navigate = useNavigate()
     return (
         <div>
 

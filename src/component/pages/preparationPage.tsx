@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Border, Footer, Heading } from "../commons";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -10,6 +10,7 @@ import { reviloActions } from "../../features/slice";
 const PreparationPage = () => {
     const dispatch = useDispatch()
     const preparation = useSelector((state:RootState) => state.preparation)
+    const userId = useSelector((state: RootState) => state.userId)
     const [content, setContent] = useState(preparation)
     const [showError, setShowError] = useState(false)
     const modules = {
@@ -28,6 +29,21 @@ const PreparationPage = () => {
             navigate('/completion')
         }
     }
+    const fetchUser = async () => {
+        console.log('no user login')
+        // try {
+        //     const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`);
+        //     dispatch(reviloActions.setUser(data.user.userId));
+        // } catch (error) {
+        //     dispatch(reviloActions.resetUser())
+        //     navigate('/')
+        // }
+    };
+    useEffect(() => {
+        if (!userId) {
+            fetchUser()
+        }
+    },)
     return (
         <div>
             <div className="px-7">

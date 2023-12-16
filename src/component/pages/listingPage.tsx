@@ -1,8 +1,30 @@
 import { useNavigate } from "react-router-dom";
 import { Border, Footer, Heading } from "../commons";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../features/store";
+import { reviloActions } from "../../features/slice";
 
 const Listing = () => {
+    const userId = useSelector((state: RootState) => state.userId)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const fetchUser = async () => {
+        try {
+            const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`, {withCredentials: true});
+            console.log(data.user)
+            dispatch(reviloActions.setUser(data.user.userId));
+        } catch (error) {
+            dispatch(reviloActions.resetUser())
+            navigate('/')
+        }
+    };
+    useEffect(() => {
+        if (!userId) {
+            fetchUser()
+        }
+    },)
     return (
         <div>
             <div className="px-7">

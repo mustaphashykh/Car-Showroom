@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialStateType } from "./type";
 
 const initialState: initialStateType = {
+  userId: '',
   showLoader: false,
   keyInfo: {
     make: "",
@@ -27,6 +28,12 @@ const reviloSlice = createSlice({
   name: "Revilo",
   initialState: initialState,
   reducers: {
+    setUser: (state, action) => {
+      state.userId = action.payload;
+    },
+    resetUser: (state) => {
+      state.userId = '';
+    },
     showLoaderToogler: (state) => {
       state.showLoader = !state.showLoader;
     },

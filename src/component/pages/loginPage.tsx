@@ -1,9 +1,16 @@
+import axios from "axios";
 import { Border, Footer, Heading } from "../commons";
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from "react-redux";
+import { reviloActions } from "../../features/slice";
+import { useEffect } from "react";
+import { RootState } from "../../features/store";
 
 const LoginPage = () => {
+    const userId = useSelector((state: RootState) => state.userId)
+    const dispatch = useDispatch()
     const validation = Yup.object({
         email: Yup.string()
             .email('invalid email address')
@@ -11,7 +18,22 @@ const LoginPage = () => {
         password: Yup.string()
             .required('please fill the above field.'),
     })
+    const loginUser = async (values: {email: string, password: string}) => {
+        dispatch(reviloActions.showLoaderToogler())
+        const {email, password} = values
+        const response = await axios.post('https://revelio-mockup.vercel.app/api/v1/auth/login',{email: email, password: password})
+        if(response.status === 200) {
+            dispatch(reviloActions.setUser(response.data.user.userId))
+            navigate('/car-listing')
+        }
+        dispatch(reviloActions.showLoaderToogler())
+    }
     const navigate = useNavigate()
+    useEffect(()=> {
+        if(userId) {
+            navigate('/car-listing')
+        }
+    })
     return (
         <div>
             <div className="px-7">
@@ -26,9 +48,8 @@ const LoginPage = () => {
                     }}
                     validationSchema={validation}
                     onSubmit={(values, { resetForm }) => {
-                        console.log(values);
+                        loginUser(values)
                         resetForm()
-                        navigate('/car-listing')
                     }}
                 >
                     {({ ...keyInfoForm }) => (

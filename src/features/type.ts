@@ -1,4 +1,5 @@
 export interface initialStateType {
+  userId: string,
   showLoader: boolean;
   keyInfo: {
     make: string;
