@@ -14,9 +14,9 @@ const Specification: React.FC<{ specification: string }> = ({ specification }) =
                 <Heading heading="Specifications" />
                 <Border />
             </div>
-            <ul className="pt-2.5 list-disc">
+            <div className="pt-2.5 list-disc">
                 <div dangerouslySetInnerHTML={{ __html: decodedHTML }} />
-            </ul>
+            </div>
         </div>
     )
 }

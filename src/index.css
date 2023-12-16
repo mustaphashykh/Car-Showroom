@@ -21,3 +21,8 @@
     border-bottom: none;
     font-size: 0.625rem;
 }
+
+ul {
+    list-style-type: disc;
+    list-style-position: inside;
+}
