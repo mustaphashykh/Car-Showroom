@@ -10,12 +10,14 @@ import axios from "axios";
 
 const PricePage = () => {
     const dispatch = useDispatch()
-    const price = useSelector((state:RootState) => state.price)
+    const price = useSelector((state: RootState) => state.price)
     const validation = Yup.object({
-        asking_price: Yup.string()
-            .required('please fill the above field.'),
-        cap_clean: Yup.string()
-            .required('please fill the above field.'),
+        asking_price: Yup.number()
+            .required('please enter the asking price properlly.')
+            .moreThan(0, 'asking price can not be zero'),
+        cap_clean: Yup.number()
+            .required('please enter the cap clean properlly.')
+            .moreThan(0, 'cap clean can not be zero'),
         autorader_retail: Yup.string()
             .required('please fill the above field.'),
     })
@@ -23,7 +25,7 @@ const PricePage = () => {
     const navigate = useNavigate()
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, {withCredentials: true});
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -87,7 +89,7 @@ const PricePage = () => {
                                     <div className="text-[0.45rem] text-red-600">{keyInfoForm.errors.autorader_retail}</div>
                                 ) : null}
                             </div>
-                            <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2" onClick={()=> navigate('/service-history')}>Previous</button>
+                            <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2" onClick={() => navigate('/service-history')}>Previous</button>
                             <br />
                             <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2">Next</button>
                         </Form>)}

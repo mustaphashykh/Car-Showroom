@@ -10,7 +10,8 @@
     outline: none;
 }
 
-.ql-container:focus, .ql-editor:focus {
+.ql-container:focus,
+.ql-editor:focus {
     outline: none;
 }
 
@@ -25,4 +26,17 @@
 ul {
     list-style-type: disc;
     list-style-position: inside;
+}
+
+div.custom-list div ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+div.custom-list div ul li {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/my-cart-f5e2b.appspot.com/o/Vectorcheck.png?alt=media&token=d22649dd-0f7c-4af6-b729-b8eb331f0aaa');
+    background-repeat: no-repeat;
+    padding-left: 1.5rem;
+    background-size: 1rem;
+    padding-bottom: 0.15rem;
 }

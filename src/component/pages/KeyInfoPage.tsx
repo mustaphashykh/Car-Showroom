@@ -10,12 +10,12 @@ import axios from "axios";
 
 const KeyInfoPage = () => {
     const userId = useSelector((state: RootState) => state.userId)
-    const keyInfo = useSelector((state:RootState) => state.keyInfo)
+    const keyInfo = useSelector((state: RootState) => state.keyInfo)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`, {withCredentials: true});
+            const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -50,10 +50,12 @@ const KeyInfoPage = () => {
             .required('please fill the above field.'),
         registration: Yup.string()
             .required('please fill the above field.'),
-        mileage: Yup.string()
-            .required('please fill the above field.'),
-        owners: Yup.string()
-            .required('please fill the above field.'),
+        mileage: Yup.number()
+            .required('please enter the mileage properlly.')
+            .moreThan(0, 'mileage can not be zero'),
+        owners: Yup.number()
+            .required('please enter the number of owners.')
+            .moreThan(0, 'owners can not be zero'),
     })
     return (
         <div>

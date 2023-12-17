@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const ImageSection: React.FC<{ images: string[]}> = ({ images }) => {
+const ImageSection: React.FC<{ images: string[], openModelToogler: () => void }> = ({ images, openModelToogler }) => {
     const imagesArray = [...images]
     const [counter, setCounter] = useState(0);
     const imageRef = useRef<HTMLImageElement>(null);
@@ -32,31 +32,33 @@ const ImageSection: React.FC<{ images: string[]}> = ({ images }) => {
         scrollImage()
     }, [counter])
     return (
-        <div className="py-10">
-            {
-                images.length > 0 && <>
-                    <div className="relative">
-                        <div className="absolute text-2xl flex w-full top-[42%] justify-between px-2">
-                            <div className="w-8 h-8 border-[1px] border-black bg-white rounded-full flex items-center justify-center cursor-pointer" onClick={decreaseCounter}>
-                                <i className="fa-solid fa-chevron-left"></i>
+        <div className="relative">
+            <div className="py-10">
+                {
+                    images.length > 0 && <>
+                        <div className="relative">
+                            <div className="absolute text-2xl flex w-full top-[42%] justify-between px-2">
+                                <div className="w-8 h-8 border-[1px] border-black bg-white rounded-full flex items-center justify-center cursor-pointer" onClick={decreaseCounter}>
+                                    <i className="fa-solid fa-chevron-left"></i>
+                                </div>
+                                <div className="w-8 h-8 border-[1px] border-black bg-white rounded-full flex items-center justify-center cursor-pointer" onClick={increaseCounter}>
+                                    <i className="fa-solid fa-chevron-right"></i>
+                                </div>
                             </div>
-                            <div className="w-8 h-8 border-[1px] border-black bg-white rounded-full flex items-center justify-center cursor-pointer" onClick={increaseCounter}>
-                                <i className="fa-solid fa-chevron-right"></i>
+                            <div className="flex overflow-hidden w-4/5 mx-auto">
+                                {
+                                    imagesArray.length > 0 && imagesArray.map((image, idx) => <img onClick={openModelToogler} ref={idx === counter ? imageRef : null} src={image} key={idx} alt="product" className="cursor-pointer" />)
+                                }
                             </div>
                         </div>
-                        <div className="flex overflow-hidden w-4/5 mx-auto">
-                            {
-                                imagesArray.length > 0 && imagesArray.map((image, idx) => <img ref={idx === counter ? imageRef : null} src={image} key={idx} alt="product" />)
-                            }
+                        <div className="flex overflow-hidden w-4/5 mx-auto pt-1">
+                            <img src={imagesArray[1]} className="w-1/3" alt="product1" />
+                            <img src={imagesArray[2]} className="w-1/3" alt="produc2" />
+                            <img src={imagesArray[3]} className="w-1/3" alt="product3" />
                         </div>
-                    </div>
-                    <div className="flex overflow-hidden w-4/5 mx-auto pt-1">
-                        <img src={imagesArray[1]} className="w-1/3" alt="product1" />
-                        <img src={imagesArray[2]} className="w-1/3" alt="produc2" />
-                        <img src={imagesArray[3]} className="w-1/3" alt="product3" />
-                    </div>
-                </>
-            }
+                    </>
+                }
+            </div>
         </div>
     )
 }

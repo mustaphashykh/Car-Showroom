@@ -14,6 +14,7 @@ const PreparationPage = () => {
     const userId = useSelector((state: RootState) => state.userId)
     const [content, setContent] = useState(preparation)
     const [showError, setShowError] = useState(false)
+    const [containsUnorderedList, setContainsUnorderedList] = useState(false)
     const modules = {
         toolbar: [
             ['bold', 'italic', 'underline',],
@@ -24,7 +25,7 @@ const PreparationPage = () => {
     const navigateToNext = () => {
         if (!content.length) {
             setShowError(true)
-        } else {
+        } else if (containsUnorderedList) {
             dispatch(reviloActions.setPreparation(content))
             setShowError(false)
             navigate('/completion')
@@ -44,6 +45,13 @@ const PreparationPage = () => {
             fetchUser()
         }
     },)
+    useEffect(() => {
+        if (content.includes('<ul>') && content.includes('</ul>')) {
+            setContainsUnorderedList(true);
+        } else {
+            setContainsUnorderedList(false);
+        }
+    }, [content])
     return (
         <div>
             <div className="px-7">
@@ -68,6 +76,9 @@ const PreparationPage = () => {
                     </div>
                     {
                         showError && <p className="text-[0.45rem] text-red-600 pt-0.5">please fill some the specification.</p>
+                    }
+                    {
+                        !containsUnorderedList && <p className="text-[0.45rem] text-red-600 pt-0.5">please enter the list of specification.</p>
                     }
                 </div>
                 <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4" onClick={() => navigate('/price')}>Previous</button>
