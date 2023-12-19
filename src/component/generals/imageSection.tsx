@@ -47,14 +47,14 @@ const ImageSection: React.FC<{ images: string[], openModelToogler: () => void }>
                             </div>
                             <div className="flex overflow-hidden w-4/5 mx-auto">
                                 {
-                                    imagesArray.length > 0 && imagesArray.map((image, idx) => <img onClick={openModelToogler} ref={idx === counter ? imageRef : null} src={image} key={idx} alt="product" className="cursor-pointer" />)
+                                    imagesArray.length > 0 && imagesArray.map((image, idx) => <img onClick={openModelToogler} ref={idx === counter ? imageRef : null} src={image} key={idx} alt="product" className="cursor-pointer h-52 object-contain" />)
                                 }
                             </div>
                         </div>
                         <div className="flex overflow-hidden w-4/5 mx-auto pt-1">
-                            <img src={imagesArray[1]} className="w-1/3" alt="product1" />
-                            <img src={imagesArray[2]} className="w-1/3" alt="produc2" />
-                            <img src={imagesArray[3]} className="w-1/3" alt="product3" />
+                            <img src={imagesArray[1]} className="w-1/3 h-16 object-contain" alt="product1" />
+                            <img src={imagesArray[2]} className="w-1/3 h-16 object-contain" alt="produc2" />
+                            <img src={imagesArray[3]} className="w-1/3 h-16 object-contain" alt="product3" />
                         </div>
                     </>
                 }

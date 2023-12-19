@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { RootState } from "../../features/store";
 import axios from "axios";
 import { uploadImg } from "../../features/firebase";
+import { toast } from "react-toastify";
 
 const CompletionPage = () => {
     const id = useSelector((state: RootState) => state.id)
@@ -32,31 +33,35 @@ const CompletionPage = () => {
                 uploadDataToServer()
             }
         } catch (error) {
-            console.log(error)
+            toast('Problem in uploading product please try again.')
         }
     }
     const uploadDataToServer = async () => {
-        const data = {
-            make: keyInfo.make,
-            model: keyInfo.model,
-            variant: keyInfo.variant,
-            registration: keyInfo.registration,
-            mileage: keyInfo.mileage,
-            numberOfOwners: keyInfo.owners,
-            specification: specification,
-            serviceHistory: serviceHistory,
-            askingPrice: price.asking_price,
-            capClean: price.cap_clean,
-            autoTraderDetail: price.autorader_retail,
-            images: images,
-            about: aboutCar,
-            preparation: preparation
-        }
-        const response = await axios.post('http://localhost:5000/api/v1/products', data, { withCredentials: true })
-        if (response) {
-            dispatch(reviloActions.showLoaderToogler())
-            dispatch(reviloActions.reset())
-            navigate('/all-listing')
+        try {
+            const data = {
+                make: keyInfo.make,
+                model: keyInfo.model,
+                variant: keyInfo.variant,
+                registration: keyInfo.registration,
+                mileage: keyInfo.mileage,
+                numberOfOwners: keyInfo.owners,
+                specification: specification,
+                serviceHistory: serviceHistory,
+                askingPrice: price.asking_price,
+                capClean: price.cap_clean,
+                autoTraderDetail: price.autorader_retail,
+                images: images,
+                about: aboutCar,
+                preparation: preparation
+            }
+            const response = await axios.post('http://localhost:5000/api/v1/products', data, { withCredentials: true })
+            if (response) {
+                dispatch(reviloActions.showLoaderToogler())
+                dispatch(reviloActions.reset())
+                navigate('/all-listing')
+            }
+        } catch (error) {
+            toast('Problem in uploading product please try again.')
         }
     }
     const uploadUpdatedImages = async () => {
@@ -73,31 +78,35 @@ const CompletionPage = () => {
                 updateDataToServer()
             }
         } catch (error) {
-            console.log(error)
+            toast('Problem in updating product please try again.')
         }
     }
     const updateDataToServer = async () => {
-        const data = {
-            make: keyInfo.make,
-            model: keyInfo.model,
-            variant: keyInfo.variant,
-            registration: keyInfo.registration,
-            mileage: keyInfo.mileage,
-            numberOfOwners: keyInfo.owners,
-            specification: specification,
-            serviceHistory: serviceHistory,
-            askingPrice: price.asking_price,
-            capClean: price.cap_clean,
-            autoTraderDetail: price.autorader_retail,
-            images: images,
-            about: aboutCar,
-            preparation: preparation
-        }
-        const response = await axios.patch(`http://localhost:5000/api/v1/products/${id}`, data, { withCredentials: true })
-        if (response) {
-            dispatch(reviloActions.showLoaderToogler())
-            dispatch(reviloActions.reset())
-            navigate('/all-listing')
+        try {
+            const data = {
+                make: keyInfo.make,
+                model: keyInfo.model,
+                variant: keyInfo.variant,
+                registration: keyInfo.registration,
+                mileage: keyInfo.mileage,
+                numberOfOwners: keyInfo.owners,
+                specification: specification,
+                serviceHistory: serviceHistory,
+                askingPrice: price.asking_price,
+                capClean: price.cap_clean,
+                autoTraderDetail: price.autorader_retail,
+                images: images,
+                about: aboutCar,
+                preparation: preparation
+            }
+            const response = await axios.patch(`http://localhost:5000/api/v1/products/${id}`, data, { withCredentials: true })
+            if (response) {
+                dispatch(reviloActions.showLoaderToogler())
+                dispatch(reviloActions.reset())
+                navigate('/all-listing')
+            }
+        } catch (error) {
+            toast('Problem in updating product please try again.')
         }
     }
     const handler = () => {
@@ -120,15 +129,15 @@ const CompletionPage = () => {
     };
     const checkForData = () => {
         if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !keyInfo.images.length || !specification.length || !serviceHistory.length || !price.asking_price || !price.cap_clean || !price.autorader_retail || !aboutCar.length || !preparation.length) {
-            navigate('/key-information')
+            navigate('/car-listing')
         }
     }
     useEffect(() => {
         if (!userId) {
             fetchUser()
-            checkForData()
         }
-    },)
+        checkForData()
+    },[])
     return (
         <div>
             <div className="px-7">

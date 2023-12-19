@@ -27,7 +27,7 @@ const ProductCard: React.FC<{ item: { make: string, model: string, variant: stri
     return (
         <div className="text-[0.65rem] border-b-[1px] border-b-gray-400 flex justify-between items-center">
             <div className="flex items-center gap-1 cursor-pointer">
-                <img src={item.images[0]} loading="lazy" alt="img" className="w-14" />
+                <img src={item.images[0]} loading="lazy" alt="img" className="w-14 h-9 object-cover" />
                 {item.make && <p>{item.make}</p>}
                 {item.model && <p>{item.model}</p>}
                 {item.variant && <p>{item.variant}</p>}

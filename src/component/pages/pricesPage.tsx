@@ -9,6 +9,10 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const PricePage = () => {
+    const keyInfo = useSelector((state: RootState) => state.keyInfo)
+    const specification = useSelector((state: RootState) => state.specification)
+    const serviceHistory = useSelector((state: RootState) => state.serviceHistory)
+    const aboutCar = useSelector((state: RootState) => state.aboutCar)
     const dispatch = useDispatch()
     const price = useSelector((state: RootState) => state.price)
     const validation = Yup.object({
@@ -32,10 +36,16 @@ const PricePage = () => {
             navigate('/')
         }
     };
+    const checkForData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !keyInfo.images.length || !specification.length || !serviceHistory.length || !aboutCar.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
+        checkForData()
     })
     return (
         <div>
@@ -44,11 +54,11 @@ const PricePage = () => {
                     <Heading heading="Prices" />
                     <Border />
                 </div>
-                <div className="py-6">
+                <div className="py-5">
                     <p className="text-[0.625rem]">
                         step 5 of 7
                     </p>
-                    <div className="bg-[#D9D9D9] w-full rounded-full h-4 mt-2">
+                    <div className="bg-[#D9D9D9] w-full rounded-full h-4 mt-1.5">
                         <div className="bg-high-light-color w-[70%] h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
                             <p>70%</p>
                         </div>
@@ -82,7 +92,7 @@ const PricePage = () => {
                                     <div className="text-[0.45rem] text-red-600">{keyInfoForm.errors.cap_clean}</div>
                                 ) : null}
                             </div>
-                            <div className="pb-4">
+                            <div className="pb-3">
                                 <label className="text-xs font-bold">Autorader Retail</label>
                                 <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('autorader_retail')} />
                                 {keyInfoForm.touched.autorader_retail && keyInfoForm.errors.autorader_retail ? (

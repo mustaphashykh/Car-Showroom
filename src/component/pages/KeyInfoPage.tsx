@@ -15,7 +15,7 @@ const KeyInfoPage = () => {
     const navigate = useNavigate()
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`https://revelio-mockup.vercel.app/api/v1/users/showMe`, { withCredentials: true });
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -37,11 +37,35 @@ const KeyInfoPage = () => {
         images: Yup.array()
             .of(
                 Yup.mixed()
-                    .required("Atleast four files are required.")
+                    .test(
+                        'fileSize',
+                        'Each file must be no larger than 1 MB',
+                        value => !value || (value && (value as File).size <= 1 * 1024 * 1024)
+                    )
+                    .test(
+                        'imageResolution',
+                        'Image resolution must be 1000x800 or less',
+                        value => {
+                            if (!value) return true;
+
+                            return new Promise((resolve) => {
+                                const img = new Image();
+                                img.onload = () => {
+                                    const valid = img.width <= 1000 && img.height <= 800;
+                                    resolve(valid);
+                                };
+                                img.onerror = () => {
+                                    resolve(false);
+                                };
+                                img.src = URL.createObjectURL(value as Blob);
+                            });
+                        }
+                    )
+                    .required("A file is required")
             )
-            .required("Atleast four files are required.")
-            .max(4, "Can not upload more than 4 images.")
-            .min(4, "Atleast four files are required."),
+            .required("At least four files are required.")
+            .max(4, "Cannot upload more than 4 images.")
+            .min(4, "At least four files are required."),
         make: Yup.string()
             .required('please fill the above field.'),
         model: Yup.string()
@@ -51,10 +75,10 @@ const KeyInfoPage = () => {
         registration: Yup.string()
             .required('please fill the above field.'),
         mileage: Yup.number()
-            .required('please enter the mileage properlly.')
+            .required('please fill the above field.')
             .moreThan(0, 'mileage can not be zero'),
         owners: Yup.number()
-            .required('please enter the number of owners.')
+            .required('please fill the above field.')
             .moreThan(0, 'owners can not be zero'),
     })
     return (
@@ -149,7 +173,7 @@ const KeyInfoPage = () => {
                                     className="hidden"
                                     multiple
                                     ref={imageUploadRef}
-                                    accept="image/*"
+                                    accept="image/jpeg,image/png,image/bmp,image/webp"
                                     onChange={(event) => {
                                         const files = event.currentTarget.files;
                                         const fileArray = [];

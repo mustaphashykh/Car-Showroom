@@ -40,3 +40,24 @@ div.custom-list div ul li {
     background-size: 1rem;
     padding-bottom: 0.15rem;
 }
+
+.Toastify__toast--default {
+    position: absolute;
+    width: 80%;
+    right: 10%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-align: center;
+    border-radius: 5px !important;
+    margin: 10px auto !important;
+    background: #8FA32E !important;
+    font-weight: 500;
+    font-size: medium;
+    color: white !important;
+  }
+
+.Toastify__close-button {
+    display: none;
+}

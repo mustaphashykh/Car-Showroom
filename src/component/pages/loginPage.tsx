@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { reviloActions } from "../../features/slice";
 import { useEffect } from "react";
 import { RootState } from "../../features/store";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
     const userId = useSelector((state: RootState) => state.userId)
@@ -18,20 +19,35 @@ const LoginPage = () => {
         password: Yup.string()
             .required('please fill the above field.'),
     })
-    const loginUser = async (values: {email: string, password: string}) => {
+    const loginUser = async (values: { email: string, password: string }) => {
         dispatch(reviloActions.showLoaderToogler())
-        const {email, password} = values
-        const response = await axios.post('http://localhost:5000/api/v1/auth/login',{email: email, password: password}, {withCredentials: true})
-        if(response.status === 200) {
-            dispatch(reviloActions.setUser(response.data.user.userId))
-            navigate('/car-listing')
+        try {
+            const { email, password } = values
+            const response = await axios.post('http://localhost:5000/api/v1/auth/login', { email: email, password: password }, { withCredentials: true })
+            if (response.status === 200) {
+                dispatch(reviloActions.setUser(response.data.user.userId))
+                navigate('/car-listing')
+            }
+        } catch (error) {
+            toast("Invalid User.");
         }
         dispatch(reviloActions.showLoaderToogler())
     }
+    const fetchUser = async () => {
+        try {
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
+            dispatch(reviloActions.setUser(data.user.userId));
+        } catch (error) {
+            dispatch(reviloActions.resetUser())
+            navigate('/')
+        }
+    };
     const navigate = useNavigate()
-    useEffect(()=> {
-        if(userId) {
+    useEffect(() => {
+        if (userId) {
             navigate('/car-listing')
+        } else {
+            fetchUser()
         }
     })
     return (

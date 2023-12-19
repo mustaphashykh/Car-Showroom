@@ -9,15 +9,15 @@ import { reviloActions } from "../../features/slice";
 import axios from "axios";
 
 const AboutCarPage = () => {
+    const keyInfo = useSelector((state: RootState) => state.keyInfo)
     const userId = useSelector((state: RootState) => state.userId)
     const aboutCar = useSelector((state:RootState) => state.aboutCar)
     const [content,setContent] = useState(aboutCar)
-    const dispatch = useDispatch()
     const [showError, setShowError] = useState(false)
+    const dispatch = useDispatch()
     const modules = {
         toolbar: [
-            ['bold', 'italic', 'underline',],
-            [{ 'list': 'bullet' }],    
+            ['bold', 'italic', 'underline',]   
         ],
     };
     const navigate = useNavigate()
@@ -39,11 +39,17 @@ const AboutCarPage = () => {
             navigate('/')
         }
     };
+    const checkForData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !keyInfo.images.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
     })
+    checkForData()
     return (
         <div>
             <div className="px-7">

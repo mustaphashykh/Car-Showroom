@@ -9,6 +9,9 @@ import { reviloActions } from "../../features/slice";
 import axios from "axios";
 
 const ServiceHistoryPage = () => {
+    const keyInfo = useSelector((state: RootState) => state.keyInfo)
+    const specification = useSelector((state: RootState) => state.specification)
+    const aboutCar = useSelector((state: RootState) => state.aboutCar)
     const dispatch = useDispatch()
     const serviceHistory = useSelector((state:RootState) => state.serviceHistory)
     const userId = useSelector((state: RootState) => state.userId)
@@ -40,10 +43,16 @@ const ServiceHistoryPage = () => {
             navigate('/')
         }
     };
+    const checkForData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !keyInfo.images.length || !specification.length || !aboutCar.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
+        checkForData()
     })
     
     useEffect(() => {
@@ -86,7 +95,7 @@ const ServiceHistoryPage = () => {
                 <br />
                 <button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2" onClick={navigateToNext}>Next</button>
             </div>
-            <Footer absoute />
+            <Footer absoute={!containsUnorderedList || showError ? false: true} />
         </div>
     )
 }

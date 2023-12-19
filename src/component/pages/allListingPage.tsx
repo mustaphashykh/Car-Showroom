@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { RootState } from "../../features/store";
 import axios from "axios";
 import { reviloActions } from "../../features/slice";
+import { toast } from "react-toastify";
 
 const AllListingPage = () => {
     const userId = useSelector((state: RootState) => state.userId)
@@ -13,20 +14,28 @@ const AllListingPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const deleteProduct = async (id: string) => {
-        const response = await axios.delete(`http://localhost:5000/api/v1/products/${id}`, { withCredentials: true })
-        if(response.status === 200) {
-            getAllProducts()
+        dispatch(reviloActions.showLoaderToogler())
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/v1/products/${id}`, { withCredentials: true })
+            if (response.status === 200) {
+                getAllProducts()
+            }
+        } catch (error) {
+            toast("Can't delete product please try again.")
         }
+        dispatch(reviloActions.showLoaderToogler())
     }
     const getAllProducts = async () => {
+        dispatch(reviloActions.showLoaderToogler())
         try {
             const response = await axios.get('http://localhost:5000/api/v1/products', { withCredentials: true })
             if (response) {
                 setProducts(response.data.products)
             }
         } catch (error) {
-            console.log(error)
+            toast("Can't fetch products please try again.")
         }
+        dispatch(reviloActions.showLoaderToogler())
     }
     const fetchUser = async () => {
         try {
@@ -42,7 +51,7 @@ const AllListingPage = () => {
             fetchUser()
         }
         getAllProducts()
-    },[])
+    }, [])
     return (
         <div>
             <div className="px-7">

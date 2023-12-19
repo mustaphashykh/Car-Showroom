@@ -9,6 +9,11 @@ import { reviloActions } from "../../features/slice";
 import axios from "axios";
 
 const PreparationPage = () => {
+    const keyInfo = useSelector((state: RootState) => state.keyInfo)
+    const specification = useSelector((state: RootState) => state.specification)
+    const serviceHistory = useSelector((state: RootState) => state.serviceHistory)
+    const aboutCar = useSelector((state: RootState) => state.aboutCar)
+    const price = useSelector((state: RootState) => state.price)
     const dispatch = useDispatch()
     const preparation = useSelector((state:RootState) => state.preparation)
     const userId = useSelector((state: RootState) => state.userId)
@@ -40,10 +45,16 @@ const PreparationPage = () => {
             navigate('/')
         }
     };
+    const checkForData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !keyInfo.images.length || !specification.length || !serviceHistory.length || !price.asking_price || !price.cap_clean || !price.autorader_retail || !aboutCar.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
+        checkForData()
     },)
     useEffect(() => {
         if (content.includes('<ul>') && content.includes('</ul>')) {
@@ -85,7 +96,7 @@ const PreparationPage = () => {
                 <br />
                 <button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2" onClick={navigateToNext}>Next</button>
             </div>
-            <Footer absoute />
+            <Footer absoute={!containsUnorderedList || showError ? false: true} />
         </div>
     )
 }
