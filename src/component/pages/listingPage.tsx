@@ -23,7 +23,7 @@ const Listing = () => {
         if (!userId) {
             fetchUser()
         }
-    })
+    },[])
     return (
         <div>
             <div className="px-7">

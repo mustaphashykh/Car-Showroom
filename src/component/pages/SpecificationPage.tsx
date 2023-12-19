@@ -52,7 +52,7 @@ const SpecificationPage = () => {
             fetchUser()
         }
         checkForData()
-    })
+    },[])
     useEffect(() => {
         if (content.includes('<ul>') && content.includes('</ul>')) {
             setContainsUnorderedList(true);

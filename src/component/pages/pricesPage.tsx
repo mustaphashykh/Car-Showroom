@@ -46,7 +46,7 @@ const PricePage = () => {
             fetchUser()
         }
         checkForData()
-    })
+    },[])
     return (
         <div>
             <div className="px-7">

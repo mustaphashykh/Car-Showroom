@@ -26,7 +26,7 @@ const KeyInfoPage = () => {
         if (!userId) {
             fetchUser()
         }
-    })
+    },[])
     const imageUploadRef = useRef<HTMLInputElement>(null);
     const imageUploadHandler = () => {
         if (imageUploadRef.current) {

@@ -48,7 +48,7 @@ const AboutCarPage = () => {
         if (!userId) {
             fetchUser()
         }
-    })
+    },[])
     checkForData()
     return (
         <div>
