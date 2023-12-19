@@ -23,6 +23,7 @@ const initialState: initialStateType = {
     autorader_retail: "",
   },
   preparation: "",
+  updateImagesArray: []
 };
 
 const decodeHtml = (html: string) => {
@@ -114,6 +115,7 @@ const reviloSlice = createSlice({
         autorader_retail: action.payload.autoTraderDetail,
       };
       state.preparation = decodeHtml(action.payload.preparation);
+      state.updateImagesArray = action.payload.images.map((image: string) => image);
     },
   },
 });

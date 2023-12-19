@@ -18,6 +18,7 @@ const AllListingPage = () => {
         try {
             const response = await axios.delete(`http://localhost:5000/api/v1/products/${id}`, { withCredentials: true })
             if (response.status === 200) {
+                toast('Product is deleted.')
                 getAllProducts()
             }
         } catch (error) {

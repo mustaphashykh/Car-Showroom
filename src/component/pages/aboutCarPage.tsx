@@ -9,6 +9,7 @@ import { reviloActions } from "../../features/slice";
 import axios from "axios";
 
 const AboutCarPage = () => {
+    const updateImagesArray = useSelector((state: RootState) => state.updateImagesArray)
     const keyInfo = useSelector((state: RootState) => state.keyInfo)
     const userId = useSelector((state: RootState) => state.userId)
     const aboutCar = useSelector((state:RootState) => state.aboutCar)
@@ -44,12 +45,22 @@ const AboutCarPage = () => {
             navigate('/car-listing')
         }
     }
+    
+    const checkForUpdateData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !updateImagesArray.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-    },[])
-    checkForData()
+        if (!updateImagesArray.length) {
+            checkForData()
+        } else {
+            checkForUpdateData()
+        }
+    }, [])
     return (
         <div>
             <div className="px-7">
@@ -68,7 +79,7 @@ const AboutCarPage = () => {
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs font-bold pb-1">Enter your Specifications below</p>
+                    <p className="text-xs font-bold pb-1">Enter about your car below</p>
                     <div className="text-[0.65rem]">
                         <ReactQuill value={content} onChange={setContent} modules={modules} />
                     </div>

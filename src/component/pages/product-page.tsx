@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { reviloActions } from "../../features/slice";
+import { toast } from "react-toastify";
 
 interface productInterface {
     make: string,
@@ -32,16 +33,16 @@ const ProductPage: React.FC = () => {
     const { id } = useParams()
     const [product, setProduct] = useState<productInterface>()
     const getProduct = async () => {
+        dispatch(reviloActions.showLoaderToogler())
         try {
-            dispatch(reviloActions.showLoaderToogler())
             const response = await axios.get(`http://localhost:5000/api/v1/products/${id}`)
             if (response.status === 200) {
                 setProduct(response.data.product)
-                dispatch(reviloActions.showLoaderToogler())
             }
         } catch (error) {
-            console.log(error)
+            toast("No such product is available.")
         }
+        dispatch(reviloActions.showLoaderToogler())
     }
     useEffect(() => {
         getProduct()
@@ -54,20 +55,23 @@ const ProductPage: React.FC = () => {
                 </div>
                 <div>
                     {
-                        product?.images.map((image, idx) => <img src={image} key={idx} alt="product" />)
+                        product?.images.map((image, idx) => <img src={image} className="w-full object-contain" key={idx} alt="product" />)
                     }
                 </div>
             </div>}
-            <div className="text-[0.75rem]">
-                {product?.make && <HeroSection make={product.make} model={product.model} varient={product.variant} askingPrice={product.askingPrice} capClean={product.capClean} autoTraderDetail={product.autoTraderDetail} />}
-                {product && <ImageSection images={product.images} openModelToogler={openModelToogler} />}
-                {product && <KeyInfo mileage={product.mileage} registration={product.registration} numberOfOwners={product.numberOfOwners} />}
-                {product && <InfoSection about={product.about} />}
-                {product && <Specification specification={product.specification} />}
-                {product && <ServiceHistory serviceHistory={product.serviceHistory} />}
-                {product && <Preparation preparation={product.preparation} />}
-                {product && <Footer />}
-            </div>
+            {product && Object.keys(product).length !== 0 ?
+                <div className="text-[0.75rem]">
+                    {product?.make && <HeroSection make={product.make} model={product.model} varient={product.variant} askingPrice={product.askingPrice} capClean={product.capClean} autoTraderDetail={product.autoTraderDetail} />}
+                    {product && <ImageSection images={product.images} openModelToogler={openModelToogler} />}
+                    {product && <KeyInfo mileage={product.mileage} registration={product.registration} numberOfOwners={product.numberOfOwners} />}
+                    {product && <InfoSection about={product.about} />}
+                    {product && <Specification specification={product.specification} />}
+                    {product && <ServiceHistory serviceHistory={product.serviceHistory} />}
+                    {product && <Preparation preparation={product.preparation} />}
+                    {product && <Footer />}
+                </div> : <div className="w-full mt-14 h-96 flex flex-col justify-center items-center">
+                    <p className="text-normal">404</p>
+                </div>}
         </div>
     )
 }

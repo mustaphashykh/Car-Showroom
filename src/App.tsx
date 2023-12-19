@@ -25,7 +25,7 @@ function App() {
     if (!userId) {
       fetchUser()
     }
-  })
+  },[])
   return (
     <>
       <div className="w-full relative shadow-xl md:max-w-sm min-h-screen mx-auto text-gray-900">

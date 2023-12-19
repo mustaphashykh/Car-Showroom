@@ -3,14 +3,16 @@ import React from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { reviloActions } from '../../features/slice';
+import { toast } from 'react-toastify';
 const ProductCard: React.FC<{ item: { make: string, model: string, variant: string, images: string[], _id: string }, deleteProduct: (id:string) => void }> = ({ item, deleteProduct }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const copyToClipboard = async (text: string) => {
         try {
             await navigator.clipboard.writeText(text);
+            toast('Copied to clipboard')
         } catch (err) {
-            console.error('Failed to copy text to clipboard', err);
+            toast('Failed to copy text to clipboard')
         }
     };
     const updateProduct = async () => {

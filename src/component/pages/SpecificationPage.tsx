@@ -9,6 +9,7 @@ import { reviloActions } from "../../features/slice";
 import axios from "axios";
 
 const SpecificationPage = () => {
+    const updateImagesArray = useSelector((state: RootState) => state.updateImagesArray)
     const keyInfo = useSelector((state: RootState) => state.keyInfo)
     const aboutCar = useSelector((state: RootState) => state.aboutCar)
     const dispatch = useDispatch()
@@ -47,12 +48,22 @@ const SpecificationPage = () => {
             navigate('/car-listing')
         }
     }
+    
+    const checkForUpdateData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !updateImagesArray.length || !aboutCar.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-        checkForData()
-    },[])
+        if (!updateImagesArray.length) {
+            checkForData()
+        } else {
+            checkForUpdateData()
+        }
+    }, [])
     useEffect(() => {
         if (content.includes('<ul>') && content.includes('</ul>')) {
             setContainsUnorderedList(true);

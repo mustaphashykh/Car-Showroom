@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/store";
 import { reviloActions } from "../../features/slice";
+import { toast } from "react-toastify";
 
 const Listing = () => {
     const userId = useSelector((state: RootState) => state.userId)
@@ -24,6 +25,17 @@ const Listing = () => {
             fetchUser()
         }
     },[])
+    const logoutUser = async () => {
+        try {
+            const response = await axios.delete('http://localhost:5000/api/v1/auth/logout', { withCredentials: true })
+            if (response.status === 200) {
+                dispatch(reviloActions.resetUser())
+                navigate('/')
+            }
+        } catch (error) {
+            toast("Can't logout please try again.")
+        }
+    }
     return (
         <div>
             <div className="px-7">
@@ -39,6 +51,7 @@ const Listing = () => {
                         see all listings
                     </div>
                 </div>
+                <button type="button" className="bg-main-color text-sm text-white w-full h-14 flex items-center justify-center rounded-lg cursor-pointer mt-4" onClick={logoutUser}>Logout</button>
             </div>
             <Footer absoute />
         </div>

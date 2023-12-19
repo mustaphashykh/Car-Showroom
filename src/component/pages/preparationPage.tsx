@@ -9,6 +9,7 @@ import { reviloActions } from "../../features/slice";
 import axios from "axios";
 
 const PreparationPage = () => {
+    const updateImagesArray = useSelector((state: RootState) => state.updateImagesArray)
     const keyInfo = useSelector((state: RootState) => state.keyInfo)
     const specification = useSelector((state: RootState) => state.specification)
     const serviceHistory = useSelector((state: RootState) => state.serviceHistory)
@@ -50,12 +51,21 @@ const PreparationPage = () => {
             navigate('/car-listing')
         }
     }
+    const checkForUpdateData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !updateImagesArray.length || !specification.length || !serviceHistory.length || !price.asking_price || !price.cap_clean || !price.autorader_retail || !aboutCar.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-        checkForData()
-    },[])
+        if (!updateImagesArray.length) {
+            checkForData()
+        } else {
+            checkForUpdateData()
+        }
+    }, [])
     useEffect(() => {
         if (content.includes('<ul>') && content.includes('</ul>')) {
             setContainsUnorderedList(true);
@@ -81,7 +91,7 @@ const PreparationPage = () => {
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs font-bold pb-1">Enter your Specifications below</p>
+                    <p className="text-xs font-bold pb-1">Enter your preparations below</p>
                     <div className="text-[0.65rem]">
                         <ReactQuill value={content} onChange={setContent} modules={modules} />
                     </div>

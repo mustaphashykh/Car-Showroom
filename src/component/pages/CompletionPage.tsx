@@ -9,6 +9,7 @@ import { uploadImg } from "../../features/firebase";
 import { toast } from "react-toastify";
 
 const CompletionPage = () => {
+    const updateImagesArray = useSelector((state: RootState) => state.updateImagesArray)
     const id = useSelector((state: RootState) => state.id)
     const images: string[] = [];
     const keyInfo = useSelector((state: RootState) => state.keyInfo)
@@ -58,6 +59,7 @@ const CompletionPage = () => {
             if (response) {
                 dispatch(reviloActions.showLoaderToogler())
                 dispatch(reviloActions.reset())
+                toast('You car is added.')
                 navigate('/all-listing')
             }
         } catch (error) {
@@ -75,13 +77,42 @@ const CompletionPage = () => {
                 }
             }
             if (images.length === 4) {
-                updateDataToServer()
+                updateDataToServerWthNewImages()
             }
         } catch (error) {
             toast('Problem in updating product please try again.')
         }
     }
-    const updateDataToServer = async () => {
+    const updateDataToServerWthPreviousImages = async () => {
+        try {
+            const data = {
+                make: keyInfo.make,
+                model: keyInfo.model,
+                variant: keyInfo.variant,
+                registration: keyInfo.registration,
+                mileage: keyInfo.mileage,
+                numberOfOwners: keyInfo.owners,
+                specification: specification,
+                serviceHistory: serviceHistory,
+                askingPrice: price.asking_price,
+                capClean: price.cap_clean,
+                autoTraderDetail: price.autorader_retail,
+                images: updateImagesArray,
+                about: aboutCar,
+                preparation: preparation
+            }
+            const response = await axios.patch(`http://localhost:5000/api/v1/products/${id}`, data, { withCredentials: true })
+            if (response) {
+                dispatch(reviloActions.showLoaderToogler())
+                dispatch(reviloActions.reset())
+                toast('Your car info is updated.')
+                navigate('/all-listing')
+            }
+        } catch (error) {
+            toast('Problem in updating product please try again.')
+        }
+    }
+    const updateDataToServerWthNewImages = async () => {
         try {
             const data = {
                 make: keyInfo.make,
@@ -103,6 +134,7 @@ const CompletionPage = () => {
             if (response) {
                 dispatch(reviloActions.showLoaderToogler())
                 dispatch(reviloActions.reset())
+                toast('Your car info is updated.')
                 navigate('/all-listing')
             }
         } catch (error) {
@@ -115,7 +147,11 @@ const CompletionPage = () => {
     }
     const updateHanlder = () => {
         dispatch(reviloActions.showLoaderToogler())
-        uploadUpdatedImages()
+        if (keyInfo.images.length) {
+            uploadUpdatedImages()
+        } else {
+            updateDataToServerWthPreviousImages()
+        }
     }
     const userId = useSelector((state: RootState) => state.userId)
     const fetchUser = async () => {
@@ -132,12 +168,21 @@ const CompletionPage = () => {
             navigate('/car-listing')
         }
     }
+    const checkForUpdateData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !updateImagesArray.length || !specification.length || !serviceHistory.length || !price.asking_price || !price.cap_clean || !price.autorader_retail || !aboutCar.length || !preparation.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-        checkForData()
-    },[])
+        if (!updateImagesArray.length) {
+            checkForData()
+        } else {
+            checkForUpdateData()
+        }
+    }, [])
     return (
         <div>
             <div className="px-7">
@@ -157,7 +202,7 @@ const CompletionPage = () => {
                 </div>
                 <p className="text-xs font-bold text-center pb-6 cursor-pointer" onClick={() => navigate('/key-information')}>Review the Information and Publish!</p>
                 <div className="flex justify-center">
-                    {id.length > 0? <button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24" onClick={updateHanlder}>Update</button>:<button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24" onClick={handler}>Publish</button>}
+                    {id.length > 0 ? <button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24" onClick={updateHanlder}>Update</button> : <button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24" onClick={handler}>Publish</button>}
                 </div>
             </div>
             <Footer absoute />

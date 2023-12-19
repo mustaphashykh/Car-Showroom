@@ -15,6 +15,6 @@ export interface initialStateType {
   serviceHistory: string;
   aboutCar: string;
   price: { asking_price: string; cap_clean: string; autorader_retail: string};
-  preparation: string;
+  preparation: string; 
+  updateImagesArray: string[]
 }
-

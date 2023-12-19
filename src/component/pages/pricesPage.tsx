@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const PricePage = () => {
+    const updateImagesArray = useSelector((state: RootState) => state.updateImagesArray)
     const keyInfo = useSelector((state: RootState) => state.keyInfo)
     const specification = useSelector((state: RootState) => state.specification)
     const serviceHistory = useSelector((state: RootState) => state.serviceHistory)
@@ -41,12 +42,22 @@ const PricePage = () => {
             navigate('/car-listing')
         }
     }
+    
+    const checkForUpdateData = () => {
+        if (!keyInfo.make || !keyInfo.model || !keyInfo.variant || !keyInfo.registration || !keyInfo.mileage || !keyInfo.owners || !updateImagesArray.length || !specification.length || !serviceHistory.length || !aboutCar.length) {
+            navigate('/car-listing')
+        }
+    }
     useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-        checkForData()
-    },[])
+        if (!updateImagesArray.length) {
+            checkForData()
+        } else {
+            checkForUpdateData()
+        }
+    }, [])
     return (
         <div>
             <div className="px-7">
