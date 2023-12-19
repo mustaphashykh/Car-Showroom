@@ -49,7 +49,7 @@ const LoginPage = () => {
         } else {
             fetchUser()
         }
-    })
+    },[])
     return (
         <div>
             <div className="px-7">
