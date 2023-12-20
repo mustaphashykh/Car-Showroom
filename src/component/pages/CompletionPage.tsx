@@ -30,7 +30,7 @@ const CompletionPage = () => {
                     }
                 }
             }
-            if (images.length === 4) {
+            if (images.length === keyInfo.images.length) {
                 uploadDataToServer()
             }
         } catch (error) {
@@ -76,7 +76,7 @@ const CompletionPage = () => {
                     }
                 }
             }
-            if (images.length === 4) {
+            if (images.length === keyInfo.images.length) {
                 updateDataToServerWthNewImages()
             }
         } catch (error) {

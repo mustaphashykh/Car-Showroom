@@ -7,12 +7,23 @@ import { toast } from 'react-toastify';
 const ProductCard: React.FC<{ item: { make: string, model: string, variant: string, images: string[], _id: string }, deleteProduct: (id:string) => void }> = ({ item, deleteProduct }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const copyToClipboard = async (text: string) => {
+    const copyToClipboard = async (text:string) => {
         try {
-            await navigator.clipboard.writeText(text);
-            toast('Copied to clipboard')
+            // if (navigator.clipboard) {
+            //     await navigator.clipboard.writeText(text);
+            //     toast('Copied to clipboard');
+            // } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                toast('Copied to clipboard');
+            // }
         } catch (err) {
-            toast('Failed to copy text to clipboard')
+            console.error('Failed to copy text to clipboard:', err);
+            toast('Failed to copy text to clipboard');
         }
     };
     const updateProduct = async () => {
@@ -29,7 +40,7 @@ const ProductCard: React.FC<{ item: { make: string, model: string, variant: stri
     return (
         <div className="text-[0.65rem] border-b-[1px] border-b-gray-400 flex justify-between items-center">
             <div className="flex items-center gap-1 cursor-pointer">
-                <img src={item.images[0]} loading="lazy" alt="img" className="w-14 h-9 object-cover" />
+                <img src={item.images[0]} loading="lazy" alt="img" className="w-14 h-9 object-contain" />
                 {item.make && <p>{item.make}</p>}
                 {item.model && <p>{item.model}</p>}
                 {item.variant && <p>{item.variant}</p>}

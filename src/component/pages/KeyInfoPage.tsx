@@ -45,14 +45,14 @@ const KeyInfoPage = () => {
                     )
                     .test(
                         'imageResolution',
-                        'Image resolution must be 1000x800 or less',
+                        'Image resolution must be 1200x1000 or less',
                         value => {
                             if (!value) return true;
 
                             return new Promise((resolve) => {
                                 const img = new Image();
                                 img.onload = () => {
-                                    const valid = img.width <= 1000 && img.height <= 800;
+                                    const valid = img.width <= 1200 && img.height <= 1000;
                                     resolve(valid);
                                 };
                                 img.onerror = () => {
@@ -93,14 +93,14 @@ const KeyInfoPage = () => {
                     )
                     .test(
                         'imageResolution',
-                        'Image resolution must be 1000x800 or less',
+                        'Image resolution must be 1200x1000 or less',
                         value => {
                             if (!value) return true;
 
                             return new Promise((resolve) => {
                                 const img = new Image();
                                 img.onload = () => {
-                                    const valid = img.width <= 1000 && img.height <= 800;
+                                    const valid = img.width <= 1200 && img.height <= 1000;
                                     resolve(valid);
                                 };
                                 img.onerror = () => {
