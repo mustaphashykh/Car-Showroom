@@ -246,7 +246,11 @@ const KeyInfoPage = () => {
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.images}</div>
                                     ) : null}
                                 </div>
-                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold px-5 mt-4">Continue</button>
+                                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4 mr-3" onClick={() => {
+                                    navigate('/car-listing')
+                                    dispatch(reviloActions.reset())
+                                }}>Back</button>
+                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4">Continue</button>
                             </Form>)}
                     </Formik> : <Formik
                         initialValues={{
@@ -344,7 +348,11 @@ const KeyInfoPage = () => {
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.images}</div>
                                     ) : null}
                                 </div>
-                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold px-5 mt-4">Continue</button>
+                                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4 mr-3" onClick={() => {
+                                    navigate('/car-listing')
+                                    dispatch(reviloActions.reset())
+                                }}>Back</button>
+                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4">Continue</button>
                             </Form>)}
                     </Formik>
                 }
