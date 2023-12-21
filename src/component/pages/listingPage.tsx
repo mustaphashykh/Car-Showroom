@@ -45,10 +45,10 @@ const Listing = () => {
                 </div>
                 <div className="mt-12 flex items-center justify-evenly gap-4">
                     <div className="bg-[#D9D9D9] border-[1px] border-gray-400 text-sm text-gray-500 w-[9.5rem] rounded-lg h-14 flex items-center justify-center cursor-pointer" onClick={() => navigate('/key-information')}>
-                        + add a new listing
+                        + Add a new listing
                     </div>
                     <div className="bg-[#D9D9D9] border-[1px] border-gray-400 text-sm text-gray-500 w-[9.5rem] h-14 flex items-center justify-center rounded-lg cursor-pointer" onClick={() => navigate('/all-listing')}>
-                        see all listings
+                        See all listings
                     </div>
                 </div>
                 <button type="button" className="bg-main-color text-sm text-white w-full h-14 flex items-center justify-center rounded-lg cursor-pointer mt-4" onClick={logoutUser}>Logout</button>

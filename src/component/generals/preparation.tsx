@@ -15,7 +15,7 @@ const Preparation: React.FC<{ preparation: string }> = ({ preparation }) => {
                 <Heading heading="Preparation" />
                 <Border />
             </div>
-            <ul className="pt-3 pl-4 list-disc">
+            <ul className="pt-3 pl-1.5">
                 <div dangerouslySetInnerHTML={{ __html: decodedHTML }} />
             </ul>
         </div>

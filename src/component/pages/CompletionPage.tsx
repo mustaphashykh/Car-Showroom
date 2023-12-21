@@ -35,6 +35,9 @@ const CompletionPage = () => {
             }
         } catch (error) {
             toast('Problem in uploading product please try again.')
+            dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.reset())
+            navigate('/car-listing')
         }
     }
     const uploadDataToServer = async () => {
@@ -43,6 +46,7 @@ const CompletionPage = () => {
                 make: keyInfo.make,
                 model: keyInfo.model,
                 variant: keyInfo.variant,
+                miles: keyInfo.miles,
                 registration: keyInfo.registration,
                 mileage: keyInfo.mileage,
                 numberOfOwners: keyInfo.owners,
@@ -64,6 +68,9 @@ const CompletionPage = () => {
             }
         } catch (error) {
             toast('Problem in uploading product please try again.')
+            dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.reset())
+            navigate('/car-listing')
         }
     }
     const uploadUpdatedImages = async () => {
@@ -81,6 +88,9 @@ const CompletionPage = () => {
             }
         } catch (error) {
             toast('Problem in updating product please try again.')
+            dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.reset())
+            navigate('/car-listing')
         }
     }
     const updateDataToServerWthPreviousImages = async () => {
@@ -90,6 +100,7 @@ const CompletionPage = () => {
                 model: keyInfo.model,
                 variant: keyInfo.variant,
                 registration: keyInfo.registration,
+                miles: keyInfo.miles,
                 mileage: keyInfo.mileage,
                 numberOfOwners: keyInfo.owners,
                 specification: specification,
@@ -110,6 +121,9 @@ const CompletionPage = () => {
             }
         } catch (error) {
             toast('Problem in updating product please try again.')
+            dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.reset())
+            navigate('/car-listing')
         }
     }
     const updateDataToServerWthNewImages = async () => {

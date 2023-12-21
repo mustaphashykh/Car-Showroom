@@ -9,6 +9,7 @@ const initialState: initialStateType = {
     make: "",
     model: "",
     variant: "",
+    miles: '',
     registration: "",
     mileage: "",
     owners: "",
@@ -46,10 +47,11 @@ const reviloSlice = createSlice({
       state.showLoader = !state.showLoader;
     },
     setKeyInfo: (state, action) => {
-      const { make, model, variant, registration, mileage, owners, images } =
+      const { make, model, registration_year, variant, registration, mileage, owners, images } =
         action.payload;
       state.keyInfo.make = make;
       state.keyInfo.model = model;
+      state.keyInfo.miles = registration_year;
       state.keyInfo.variant = variant;
       state.keyInfo.mileage = mileage;
       state.keyInfo.registration = registration;
@@ -79,6 +81,7 @@ const reviloSlice = createSlice({
       state.keyInfo = {
         make: "",
         model: "",
+        miles: '',
         variant: "",
         registration: "",
         mileage: "",
@@ -100,6 +103,7 @@ const reviloSlice = createSlice({
       state.keyInfo = {
         make: action.payload.make,
         model: action.payload.model,
+        miles: action.payload.miles,
         variant: action.payload.variant,
         registration: action.payload.registration,
         mileage: action.payload.mileage.toString(),

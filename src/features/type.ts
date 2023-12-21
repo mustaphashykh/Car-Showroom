@@ -5,6 +5,7 @@ export interface initialStateType {
   keyInfo: {
     make: string;
     model: string;
+    miles: string;
     variant: string;
     registration: string;
     mileage: string;

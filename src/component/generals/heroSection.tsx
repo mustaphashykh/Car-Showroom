@@ -5,7 +5,7 @@ const HeroSection: React.FC<{ make: string, model: string, varient: string, aski
     return (
         <div className="pl-7">
             <div>
-                <Heading heading={make} />
+                <Heading heading={make + " " + model + " " + varient} />
                 <Border />
             </div>
             <div className="pt-2 pb-7 flex gap-1">

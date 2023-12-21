@@ -48,20 +48,29 @@ const AllListingPage = () => {
         }
     };
     useEffect(() => {
+        getAllProducts()
+    }, [])
+
+    useEffect(() => {
         if (!userId) {
             fetchUser()
         }
-        getAllProducts()
     }, [])
     return (
         <div>
             <div className="px-7">
-                <div className="pb-4">
-                    <Heading heading="All Listings" />
-                    <Border />
+                <div className="pb-4 flex items-center justify-between">
+                    <div>
+                        <Heading heading="All Listings" />
+                        <Border />
+                    </div>
+                    <div className="flex cursor-pointer py-1.5 px-3 rounded items-center gap-1 text-xs bg-main-color text-white" onClick={() => navigate('/car-listing')}>
+                        <i className="fa-solid fa-arrow-left"></i>
+                        <p>Main Menu</p>
+                    </div>
                 </div>
                 <div>
-                    <div className="text-[0.5rem] border-b-[1px] border-b-gray-400 flex justify-between text-gray-500">
+                    <div className="text-[0.65rem] border-b-[1px] border-b-gray-400 flex justify-between text-gray-500">
                         <p>Name</p>
                         <div className="flex gap-3">
                             <p>CopyURL</p>
@@ -71,7 +80,7 @@ const AllListingPage = () => {
                     </div>
                     <div className="pb-32">
                         {
-                            products.length ? products.map((item, idx) => <ProductCard key={idx} deleteProduct={deleteProduct} item={item} />) : <p className="text-center text-high-light-color font-semibold text-sm pt-10">No product found</p>
+                            products.length > 0 && products.map((item, idx) => <ProductCard key={idx} deleteProduct={deleteProduct} item={item} />)
                         }
                     </div>
                 </div>

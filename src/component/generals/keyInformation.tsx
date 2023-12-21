@@ -2,7 +2,7 @@ import React from 'react';
 import pointer from '../../assets/Vector 2.png'
 import { Border, Heading } from "../commons";
 
-const KeyInfo: React.FC<{mileage: number, numberOfOwners: number,registration: string}> = ({mileage, numberOfOwners, registration}) => {
+const KeyInfo: React.FC<{ miles: number, mileage: number, numberOfOwners: number, registration: string }> = ({ miles, mileage, numberOfOwners, registration }) => {
     return (
         <div className="pl-7">
             <div>
@@ -11,11 +11,11 @@ const KeyInfo: React.FC<{mileage: number, numberOfOwners: number,registration: s
                 <div className="pl-3 pt-5 pb-6 flex flex-wrap gap-y-4">
                     <div className="flex items-center gap-1.5 w-1/2">
                         <img src={pointer} className="w-3" alt="pointer" />
-                        <p>51000 miles</p>
+                        <p>Registration-{registration}</p>
                     </div>
                     <div className="flex items-center gap-1.5 w-1/2">
                         <img src={pointer} className="w-3" alt="pointer" />
-                        <p>Registration - {registration}</p>
+                        <p>Registration-Year-{miles ? miles: 'NAN'}</p>
                     </div>
                     <div className="flex items-center gap-1.5 w-1/2">
                         <img src={pointer} className="w-3" alt="pointer" />

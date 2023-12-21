@@ -9,10 +9,10 @@ const ProductCard: React.FC<{ item: { make: string, model: string, variant: stri
     const dispatch = useDispatch()
     const copyToClipboard = async (text:string) => {
         try {
-            // if (navigator.clipboard) {
-            //     await navigator.clipboard.writeText(text);
-            //     toast('Copied to clipboard');
-            // } else {
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(text);
+                toast('Copied to clipboard');
+            } else {
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
                 document.body.appendChild(textarea);
@@ -20,7 +20,7 @@ const ProductCard: React.FC<{ item: { make: string, model: string, variant: stri
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
                 toast('Copied to clipboard');
-            // }
+            }
         } catch (err) {
             console.error('Failed to copy text to clipboard:', err);
             toast('Failed to copy text to clipboard');
@@ -38,14 +38,14 @@ const ProductCard: React.FC<{ item: { make: string, model: string, variant: stri
         }
     }
     return (
-        <div className="text-[0.65rem] border-b-[1px] border-b-gray-400 flex justify-between items-center">
-            <div className="flex items-center gap-1 cursor-pointer">
-                <img src={item.images[0]} loading="lazy" alt="img" className="w-14 h-9 object-contain" />
+        <div className="text-[0.8rem] border-b-[1px] border-b-gray-400 flex justify-between items-center py-1">
+            <div className="flex items-center gap-0.5 cursor-pointer" onClick={() => navigate(`/car-display/${item._id}`)}>
+                <img src={item.images[0]} loading="lazy" alt="img" className="w-14 h-11 object-contain" />
                 {item.make && <p>{item.make}</p>}
                 {item.model && <p>{item.model}</p>}
                 {item.variant && <p>{item.variant}</p>}
             </div>
-            <div className="text-gray-500 text-xs flex gap-5 pr-2">
+            <div className="text-gray-500 text-[0.8rem] flex gap-7 pr-2.5">
                 <i className="fa-regular fa-copy pr-1 cursor-pointer" onClick={() => copyToClipboard(`http://localhost:5173/car-display/${item._id}`)}></i>
                 <i className="fa-solid fa-pen cursor-pointer" onClick={updateProduct}></i>
                 <i className="fa-regular fa-trash-can cursor-pointer" onClick={() => deleteProduct(item._id)}></i>

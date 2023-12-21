@@ -14,7 +14,7 @@ const ServiceHistory: React.FC<{ serviceHistory: string }> = ({ serviceHistory }
                 <Heading heading="Service History" />
                 <Border />
             </div>
-            <div className="py-3 pl-4">
+            <div className="py-3 pl-1.5">
                 <div dangerouslySetInnerHTML={{ __html: decodedHTML }} />
             </div>
         </div>

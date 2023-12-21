@@ -42,21 +42,15 @@ div.custom-list div ul li {
 }
 
 .Toastify__toast--default {
-    cursor: pointer;
-    position: absolute;
-    width: 80%;
-    right: 10%;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
     text-align: center;
     border-radius: 5px !important;
-    margin: 10px auto !important;
-    background: #8FA32E !important;
-    font-weight: 500;
-    font-size: medium;
+    margin-right: 6px !important;
+    margin-top: 6px !important;
+    margin-left: 6px !important;
     color: white !important;
+    background: #8FA32E !important;
+    font-weight: bold;
+    font-size: 0.9rem;
   }
 
 .Toastify__close-button {

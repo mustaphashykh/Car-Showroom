@@ -1,17 +1,19 @@
 import { useParams } from "react-router-dom";
-import { Footer } from "../commons";
+import { Footer, LoadingScreen } from "../commons";
 import { HeroSection, ImageSection, InfoSection, KeyInfo, Preparation, ServiceHistory, Specification } from "../generals";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { reviloActions } from "../../features/slice";
 import { toast } from "react-toastify";
+import { RootState } from "../../features/store";
 
 interface productInterface {
     make: string,
     model: string,
     variant: string,
     registration: string,
+    miles: number,
     mileage: number,
     numberOfOwners: number,
     specification: string,
@@ -25,6 +27,7 @@ interface productInterface {
 }
 
 const ProductPage: React.FC = () => {
+    const showLoader = useSelector((state: RootState) => state.showLoader)
     const [openModel, setOpenModel] = useState(false);
     const openModelToogler = () => {
         setOpenModel(!openModel)
@@ -49,7 +52,7 @@ const ProductPage: React.FC = () => {
     }, [])
     return (
         <div className="relative">
-            {openModel && <div className="w-full bg-[#0000002e] z-10 absolute -top-8">
+            {openModel ? <div className="w-full h-full bg-[#0000002e] z-30 absolute -top-8">
                 <div className="w-full text-right text-lg pr-2 pt-1">
                     <i className="fa-solid fa-xmark cursor-pointer" onClick={openModelToogler}></i>
                 </div>
@@ -58,20 +61,19 @@ const ProductPage: React.FC = () => {
                         product?.images.map((image, idx) => <img src={image} className="w-full object-contain" key={idx} alt="product" />)
                     }
                 </div>
-            </div>}
-            {product && Object.keys(product).length !== 0 ?
-                <div className="text-[0.75rem]">
-                    {product?.make && <HeroSection make={product.make} model={product.model} varient={product.variant} askingPrice={product.askingPrice} capClean={product.capClean} autoTraderDetail={product.autoTraderDetail} />}
-                    {product && <ImageSection images={product.images} openModelToogler={openModelToogler} />}
-                    {product && <KeyInfo mileage={product.mileage} registration={product.registration} numberOfOwners={product.numberOfOwners} />}
-                    {product && <InfoSection about={product.about} />}
-                    {product && <Specification specification={product.specification} />}
-                    {product && <ServiceHistory serviceHistory={product.serviceHistory} />}
-                    {product && <Preparation preparation={product.preparation} />}
-                    {product && <Footer />}
-                </div> : <div className="w-full mt-14 h-96 flex flex-col justify-center items-center">
-                    <p className="text-normal">404</p>
-                </div>}
+            </div> : (
+                product && Object.keys(product).length !== 0 ?
+                    <div className="text-[0.75rem]">
+                        {product?.make && <HeroSection make={product.make} model={product.model} varient={product.variant} askingPrice={product.askingPrice} capClean={product.capClean} autoTraderDetail={product.autoTraderDetail} />}
+                        {product && <ImageSection images={product.images} openModelToogler={openModelToogler} />}
+                        {product && <KeyInfo miles={product.miles} mileage={product.mileage} registration={product.registration} numberOfOwners={product.numberOfOwners} />}
+                        {product && <InfoSection about={product.about} />}
+                        {product && <Specification specification={product.specification} />}
+                        {product && <ServiceHistory serviceHistory={product.serviceHistory} />}
+                        {product && <Preparation preparation={product.preparation} />}
+                        {product && <Footer />}
+                    </div> : showLoader && <LoadingScreen />
+            )}
         </div>
     )
 }
