@@ -78,14 +78,14 @@ const AllListingPage = () => {
                             <p>Trash</p>
                         </div>
                     </div>
-                    <div className="pb-32">
+                    <div className="pb-5">
                         {
                             products.length > 0 && products.map((item, idx) => <ProductCard key={idx} deleteProduct={deleteProduct} item={item} />)
                         }
                     </div>
                 </div>
             </div>
-            <Footer isShow absoute={products.length === 0 ? true: false} />
+            <Footer isShow />
         </div>
     )
 }
