@@ -36,6 +36,7 @@ const CompletionPage = () => {
         } catch (error) {
             toast('Problem in uploading product please try again.')
             dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.showUploadMessageToogler())
             dispatch(reviloActions.reset())
             navigate('/car-listing')
         }
@@ -62,6 +63,7 @@ const CompletionPage = () => {
             const response = await axios.post('http://localhost:5000/api/v1/products', data, { withCredentials: true })
             if (response) {
                 dispatch(reviloActions.showLoaderToogler())
+                dispatch(reviloActions.showUploadMessageToogler())
                 dispatch(reviloActions.reset())
                 toast('You car is added.')
                 navigate('/all-listing')
@@ -69,6 +71,7 @@ const CompletionPage = () => {
         } catch (error) {
             toast('Problem in uploading product please try again.')
             dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.showUploadMessageToogler())
             dispatch(reviloActions.reset())
             navigate('/car-listing')
         }
@@ -89,6 +92,7 @@ const CompletionPage = () => {
         } catch (error) {
             toast('Problem in updating product please try again.')
             dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.showUploadMessageToogler())
             dispatch(reviloActions.reset())
             navigate('/car-listing')
         }
@@ -115,6 +119,7 @@ const CompletionPage = () => {
             const response = await axios.patch(`http://localhost:5000/api/v1/products/${id}`, data, { withCredentials: true })
             if (response) {
                 dispatch(reviloActions.showLoaderToogler())
+                dispatch(reviloActions.showUploadMessageToogler())
                 dispatch(reviloActions.reset())
                 toast('Your car info is updated.')
                 navigate('/all-listing')
@@ -122,6 +127,7 @@ const CompletionPage = () => {
         } catch (error) {
             toast('Problem in updating product please try again.')
             dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.showUploadMessageToogler())
             dispatch(reviloActions.reset())
             navigate('/car-listing')
         }
@@ -147,20 +153,27 @@ const CompletionPage = () => {
             const response = await axios.patch(`http://localhost:5000/api/v1/products/${id}`, data, { withCredentials: true })
             if (response) {
                 dispatch(reviloActions.showLoaderToogler())
+                dispatch(reviloActions.showUploadMessageToogler())
                 dispatch(reviloActions.reset())
                 toast('Your car info is updated.')
                 navigate('/all-listing')
             }
         } catch (error) {
             toast('Problem in updating product please try again.')
+            dispatch(reviloActions.showLoaderToogler())
+            dispatch(reviloActions.showUploadMessageToogler())
+            dispatch(reviloActions.reset())
+            navigate('/car-listing')
         }
     }
     const handler = () => {
         dispatch(reviloActions.showLoaderToogler())
+        dispatch(reviloActions.showUploadMessageToogler())
         uploadImages()
     }
     const updateHanlder = () => {
         dispatch(reviloActions.showLoaderToogler())
+        dispatch(reviloActions.showUploadMessageToogler())
         if (keyInfo.images.length) {
             uploadUpdatedImages()
         } else {
@@ -209,7 +222,7 @@ const CompletionPage = () => {
                     step 7 of 7
                     </p>
                     <div className="bg-[#D9D9D9] w-full rounded-full h-5 mt-2">
-                        <div className="bg-high-light-color w-[42%] h-full rounded-full px-2 font-semibold text-[0.75rem] text-white flex items-center justify-end">
+                        <div className="bg-high-light-color w-[100%] h-full rounded-full px-2 font-semibold text-[0.75rem] text-white flex items-center justify-end">
                             <p>100%</p>
                         </div>
                     </div>

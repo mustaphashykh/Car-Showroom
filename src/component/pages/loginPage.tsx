@@ -88,7 +88,7 @@ const LoginPage = () => {
                         </Form>)}
                 </Formik>
             </div>
-            <Footer absoute isShow />
+            <Footer isShow />
         </div>
     )
 }

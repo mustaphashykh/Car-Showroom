@@ -1,6 +1,7 @@
 export interface initialStateType {
   id: string;
   userId: string,
+  showUploadMessage: boolean;
   showLoader: boolean;
   keyInfo: {
     make: string;

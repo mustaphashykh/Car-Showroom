@@ -85,7 +85,7 @@ const PreparationPage = () => {
                     step 6 of 7
                     </p>
                     <div className="bg-[#D9D9D9] w-full rounded-full h-5 mt-2">
-                        <div className="bg-high-light-color w-[42%] h-full rounded-full px-2 font-semibold text-[0.75rem] text-white flex items-center justify-end">
+                        <div className="bg-high-light-color w-[82%] h-full rounded-full px-2 font-semibold text-[0.75rem] text-white flex items-center justify-end">
                             <p>82%</p>
                         </div>
                     </div>

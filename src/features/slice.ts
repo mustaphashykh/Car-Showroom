@@ -4,6 +4,7 @@ import { initialStateType } from "./type";
 const initialState: initialStateType = {
   id: "",
   userId: "",
+  showUploadMessage: false,
   showLoader: false,
   keyInfo: {
     make: "",
@@ -42,6 +43,10 @@ const reviloSlice = createSlice({
     },
     resetUser: (state) => {
       state.userId = "";
+    },
+    
+    showUploadMessageToogler: (state) => {
+      state.showUploadMessage = !state.showUploadMessage;
     },
     showLoaderToogler: (state) => {
       state.showLoader = !state.showLoader;

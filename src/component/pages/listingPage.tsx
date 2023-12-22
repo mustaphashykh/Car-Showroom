@@ -41,7 +41,7 @@ const Listing = () => {
     }
     return (
         <div>
-            <div className="px-7 pb-16">
+            <div className="px-7 pb-10">
                 <div>
                     <Heading heading="Listings" />
                     <Border />
@@ -56,7 +56,7 @@ const Listing = () => {
                 </div>
                 <button type="button" className="bg-main-color text-sm text-white w-full h-14 flex items-center justify-center rounded-lg cursor-pointer mt-6" onClick={logoutUser}>Logout</button>
             </div>
-            <Footer absoute isShow />
+            <Footer isShow />
         </div>
     )
 }
