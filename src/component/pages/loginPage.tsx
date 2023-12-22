@@ -23,7 +23,7 @@ const LoginPage = () => {
         dispatch(reviloActions.showLoaderToogler())
         try {
             const { email, password } = values
-            const response = await axios.post('/api/v1/auth/login', { email: email, password: password }, { withCredentials: true })
+            const response = await axios.post('http://localhost:5000/api/v1/auth/login', { email: email, password: password }, { withCredentials: true })
             if (response.status === 200) {
                 dispatch(reviloActions.setUser(response.data.user.userId))
                 navigate('/car-listing')
@@ -35,7 +35,7 @@ const LoginPage = () => {
     }
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/users/showMe`, { withCredentials: true });
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -51,8 +51,8 @@ const LoginPage = () => {
         }
     },[])
     return (
-        <div>
-            <div className="px-7 pb-16">
+        <div className="flex flex-col justify-between h-screen">
+            <div className="px-7 pt-28">
                 <div>
                     <Heading heading="Login" />
                     <Border />

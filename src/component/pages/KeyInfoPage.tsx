@@ -16,7 +16,7 @@ const KeyInfoPage = () => {
     const navigate = useNavigate()
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/users/showMe`, { withCredentials: true });
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -132,8 +132,8 @@ const KeyInfoPage = () => {
             .moreThan(0, 'owners can not be zero'),
     })
     return (
-        <div className="flex flex-col">
-            <div className="px-7">
+        <div className="flex flex-col gap-8">
+            <div className="px-7 pt-28">
                 <div>
                     <Heading heading="Key Information" />
                     <Border />

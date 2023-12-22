@@ -36,7 +36,7 @@ const SpecificationPage = () => {
     }
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/users/showMe`, {withCredentials: true});
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, {withCredentials: true});
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -72,8 +72,8 @@ const SpecificationPage = () => {
         }
     }, [content])
     return (
-        <div>
-            <div className="px-7">
+        <div className="flex flex-col justify-between min-h-screen gap-8">
+            <div className="px-7 pt-28">
                 <div>
                     <Heading heading="Specification" />
                     <Border />

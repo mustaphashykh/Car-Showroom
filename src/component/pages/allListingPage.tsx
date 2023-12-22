@@ -16,7 +16,7 @@ const AllListingPage = () => {
     const deleteProduct = async (id: string) => {
         dispatch(reviloActions.showLoaderToogler())
         try {
-            const response = await axios.delete(`/api/v1/products/${id}`, { withCredentials: true })
+            const response = await axios.delete(`http://localhost:5000/api/v1/products/${id}`, { withCredentials: true })
             if (response.status === 200) {
                 toast('Product is deleted.')
                 getAllProducts()
@@ -29,7 +29,7 @@ const AllListingPage = () => {
     const getAllProducts = async () => {
         dispatch(reviloActions.showLoaderToogler())
         try {
-            const response = await axios.get('/api/v1/products', { withCredentials: true })
+            const response = await axios.get('http://localhost:5000/api/v1/products', { withCredentials: true })
             if (response) {
                 setProducts(response.data.products)
             }
@@ -40,7 +40,7 @@ const AllListingPage = () => {
     }
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/users/showMe`, { withCredentials: true });
+            const { data } = await axios.get(`http://localhost:5000/api/v1/users/showMe`, { withCredentials: true });
             dispatch(reviloActions.setUser(data.user.userId));
         } catch (error) {
             dispatch(reviloActions.resetUser())
@@ -57,8 +57,8 @@ const AllListingPage = () => {
         }
     }, [])
     return (
-        <div>
-            <div className="px-7">
+        <div className="flex flex-col justify-between min-h-screen">
+            <div className="px-7 pt-28">
                 <div className="pb-4 flex items-center justify-between">
                     <div>
                         <Heading heading="All Listings" />
