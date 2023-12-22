@@ -51,8 +51,8 @@ const ProductPage: React.FC = () => {
         getProduct()
     }, [])
     return (
-        <div className="relative flex flex-col justify-between h-screen">
-            {openModel ? <div className="w-full h-full z-30 absolute -top-8 pt-28">
+        <div className="relative flex flex-col justify-between min-h-screen">
+            {openModel ? <div className="w-full z-30 absolute -top-8 pt-28">
                 <div className="w-full text-right text-[1.5rem] pr-2 pt-1">
                     <i className="fa-solid fa-xmark cursor-pointer" onClick={openModelToogler}></i>
                 </div>
