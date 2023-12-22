@@ -81,17 +81,17 @@ const PreparationPage = () => {
                     <Border />
                 </div>
                 <div className="py-6">
-                    <p className="text-[0.625rem]">
-                        step 6 of 7
+                    <p className="text-[0.875rem]">
+                    step 6 of 7
                     </p>
-                    <div className="bg-[#D9D9D9] w-full rounded-full h-4 mt-2">
-                        <div className="bg-high-light-color w-[82%] h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
+                    <div className="bg-[#D9D9D9] w-full rounded-full h-5 mt-2">
+                        <div className="bg-high-light-color w-[42%] h-full rounded-full px-2 font-semibold text-[0.75rem] text-white flex items-center justify-end">
                             <p>82%</p>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs font-bold pb-1">Enter your preparations below</p>
+                    <p className="text-[1.25rem] font-bold pb-1">Enter your preparations below</p>
                     <div className="text-[0.65rem]">
                         <ReactQuill value={content} onChange={setContent} modules={modules} />
                     </div>
@@ -102,11 +102,11 @@ const PreparationPage = () => {
                         !containsUnorderedList && <p className="text-[0.45rem] text-red-600 pt-0.5">please enter the list of specification.</p>
                     }
                 </div>
-                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4" onClick={() => navigate('/price')}>Previous</button>
+                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-[1.25rem] font-bold w-32 mt-4" onClick={() => navigate('/price')}>Previous</button>
                 <br />
-                <button type="button" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-2" onClick={navigateToNext}>Next</button>
+                <button type="button" className="bg-main-color text-white py-2 rounded-full text-[1.25rem] font-bold w-32 mt-2" onClick={navigateToNext}>Next</button>
             </div>
-            <Footer absoute={!containsUnorderedList || showError ? false: true} />
+            <Footer isShow />
         </div>
     )
 }

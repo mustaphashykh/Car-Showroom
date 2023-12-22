@@ -26,19 +26,22 @@ const Listing = () => {
         }
     },[])
     const logoutUser = async () => {
+        dispatch(reviloActions.showLoaderToogler())
         try {
             const response = await axios.delete('http://localhost:5000/api/v1/auth/logout', { withCredentials: true })
             if (response.status === 200) {
                 dispatch(reviloActions.resetUser())
                 navigate('/')
+                dispatch(reviloActions.showLoaderToogler())
             }
         } catch (error) {
             toast("Can't logout please try again.")
+            dispatch(reviloActions.showLoaderToogler())
         }
     }
     return (
         <div>
-            <div className="px-7">
+            <div className="px-7 pb-16">
                 <div>
                     <Heading heading="Listings" />
                     <Border />
@@ -51,9 +54,9 @@ const Listing = () => {
                         See all listings
                     </div>
                 </div>
-                <button type="button" className="bg-main-color text-sm text-white w-full h-14 flex items-center justify-center rounded-lg cursor-pointer mt-4" onClick={logoutUser}>Logout</button>
+                <button type="button" className="bg-main-color text-sm text-white w-full h-14 flex items-center justify-center rounded-lg cursor-pointer mt-6" onClick={logoutUser}>Logout</button>
             </div>
-            <Footer absoute />
+            <Footer absoute isShow />
         </div>
     )
 }

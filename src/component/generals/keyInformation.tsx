@@ -8,7 +8,7 @@ const KeyInfo: React.FC<{ miles: number, mileage: number, numberOfOwners: number
             <div>
                 <Heading heading="Key Information" />
                 <Border />
-                <div className="pl-3 pt-5 pb-6 flex flex-wrap gap-y-4">
+                <div className="text-[0.875rem] pt-5 pb-6 flex flex-wrap gap-y-4">
                     <div className="flex items-center gap-1.5 w-1/2">
                         <img src={pointer} className="w-3" alt="pointer" />
                         <p>Registration-{registration}</p>

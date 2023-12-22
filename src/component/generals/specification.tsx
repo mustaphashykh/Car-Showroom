@@ -14,7 +14,7 @@ const Specification: React.FC<{ specification: string }> = ({ specification }) =
                 <Heading heading="Specifications" />
                 <Border />
             </div>
-            <div className="pt-2.5 custom-list">
+            <div className="custom-list text-[0.875rem] pt-3">
                 <div dangerouslySetInnerHTML={{ __html: decodedHTML }} />
             </div>
         </div>

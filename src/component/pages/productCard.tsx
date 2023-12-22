@@ -4,10 +4,10 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { reviloActions } from '../../features/slice';
 import { toast } from 'react-toastify';
-const ProductCard: React.FC<{ item: { make: string, model: string, variant: string, images: string[], _id: string }, deleteProduct: (id:string) => void }> = ({ item, deleteProduct }) => {
+const ProductCard: React.FC<{ item: { make: string, model: string, variant: string, images: string[], _id: string }, deleteProduct: (id: string) => void }> = ({ item, deleteProduct }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const copyToClipboard = async (text:string) => {
+    const copyToClipboard = async (text: string) => {
         try {
             if (navigator.clipboard) {
                 await navigator.clipboard.writeText(text);
@@ -38,14 +38,16 @@ const ProductCard: React.FC<{ item: { make: string, model: string, variant: stri
         }
     }
     return (
-        <div className="text-[0.8rem] border-b-[1px] border-b-gray-400 flex justify-between items-center py-1">
-            <div className="flex items-center gap-0.5 cursor-pointer" onClick={() => navigate(`/car-display/${item._id}`)}>
-                <img src={item.images[0]} loading="lazy" alt="img" className="w-14 h-11 object-contain" />
-                {item.make && <p>{item.make}</p>}
-                {item.model && <p>{item.model}</p>}
-                {item.variant && <p>{item.variant}</p>}
+        <div className="text-[0.8rem] border-b-[1px] border-b-gray-400 flex justify-between items-center py-0.5">
+            <div className="flex items-start w-48 gap-0.5 cursor-pointer text-[1rem]" onClick={() => navigate(`/car-display/${item._id}`)}>
+                <img src={item.images[0]} loading="lazy" alt="img" className="w-14 h-9 object-contain" />
+                <div className='flex gap-x-1 text-left flex-wrap'>
+                    {item.make && <p>{item.make}</p>}
+                    {item.model && <p>{item.model}</p>}
+                    {item.variant && <p>{item.variant}</p>}
+                </div>
             </div>
-            <div className="text-gray-500 text-[0.8rem] flex gap-7 pr-2.5">
+            <div className="text-gray-500 text-[0.8rem] flex gap-10 pr-2.5">
                 <i className="fa-regular fa-copy pr-1 cursor-pointer" onClick={() => copyToClipboard(`http://localhost:5173/car-display/${item._id}`)}></i>
                 <i className="fa-solid fa-pen cursor-pointer" onClick={updateProduct}></i>
                 <i className="fa-regular fa-trash-can cursor-pointer" onClick={() => deleteProduct(item._id)}></i>

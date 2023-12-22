@@ -8,11 +8,11 @@ const HeroSection: React.FC<{ make: string, model: string, varient: string, aski
                 <Heading heading={make + " " + model + " " + varient} />
                 <Border />
             </div>
-            <div className="pt-2 pb-7 flex gap-1">
+            <div className="pt-2 pb-7 flex gap-1 text-[1.125rem]">
                 <p>{model}</p>
                 <p>{varient}</p>
             </div>
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5 text-[1.063rem]">
                 <div className="flex items-center gap-1.5">
                     <img className="w-4 h-4" src={pattern} alt="pattern" />
                     <p>Asking Price - £{askingPrice}. Zero fees apply!!</p>

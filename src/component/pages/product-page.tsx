@@ -71,7 +71,7 @@ const ProductPage: React.FC = () => {
                         {product && <Specification specification={product.specification} />}
                         {product && <ServiceHistory serviceHistory={product.serviceHistory} />}
                         {product && <Preparation preparation={product.preparation} />}
-                        {product && <Footer />}
+                        {product && <Footer isShow />}
                     </div> : showLoader && <LoadingScreen />
             )}
         </div>

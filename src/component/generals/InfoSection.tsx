@@ -13,7 +13,7 @@ const InfoSection : React.FC<{about: string}> = ({about}) => {
                 <Heading heading="About the Car:" />
                 <Border />
             </div>
-            <div dangerouslySetInnerHTML={{ __html: decodedHTML }} />
+            <div className="text-[0.875rem] pt-2" dangerouslySetInnerHTML={{ __html: decodedHTML }} />
         </div>
     )
 }

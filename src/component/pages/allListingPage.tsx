@@ -70,12 +70,12 @@ const AllListingPage = () => {
                     </div>
                 </div>
                 <div>
-                    <div className="text-[0.65rem] border-b-[1px] border-b-gray-400 flex justify-between text-gray-500">
+                    <div className="text-[0.875rem] border-b-[1px] border-b-gray-400 flex justify-between text-black font-semibold">
                         <p>Name</p>
                         <div className="flex gap-3">
                             <p>CopyURL</p>
                             <p>Edit</p>
-                            <p>Delete</p>
+                            <p>Trash</p>
                         </div>
                     </div>
                     <div className="pb-32">
@@ -85,7 +85,7 @@ const AllListingPage = () => {
                     </div>
                 </div>
             </div>
-            <Footer absoute />
+            <Footer isShow absoute={products.length === 0 ? true: false} />
         </div>
     )
 }

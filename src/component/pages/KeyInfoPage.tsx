@@ -132,19 +132,18 @@ const KeyInfoPage = () => {
             .moreThan(0, 'owners can not be zero'),
     })
     return (
-        <div>
-
+        <div className="flex flex-col">
             <div className="px-7">
                 <div>
                     <Heading heading="Key Information" />
                     <Border />
                 </div>
                 <div className="py-6">
-                    <p className="text-[0.625rem]">
+                    <p className="text-[0.875rem]">
                         step 1 of 7
                     </p>
-                    <div className="bg-[#D9D9D9] w-full rounded-full h-4 mt-2">
-                        <div className="bg-high-light-color w-[14%] h-full rounded-full px-1.5 text-[0.5rem] text-white flex items-center justify-end">
+                    <div className="bg-[#D9D9D9] w-full rounded-full h-5 mt-2">
+                        <div className="bg-high-light-color w-[14%] h-full rounded-full px-2 font-semibold text-[0.75rem] text-white flex items-center justify-end">
                             <p>14%</p>
                         </div>
                     </div>
@@ -170,60 +169,60 @@ const KeyInfoPage = () => {
                         {({ setFieldValue, ...keyInfoForm }) => (
                             <Form>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Make</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('make')} />
+                                    <label className="text-[0.875rem] font-bold">Make</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('make')} />
                                     {keyInfoForm.touched.make && keyInfoForm.errors.make ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.make}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Model</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('model')} />
+                                    <label className="text-[0.875rem] font-bold">Model</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('model')} />
                                     {keyInfoForm.touched.model && keyInfoForm.errors.model ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.model}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Variant</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('variant')} />
+                                    <label className="text-[0.875rem] font-bold">Variant</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('variant')} />
                                     {keyInfoForm.touched.variant && keyInfoForm.errors.variant ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.variant}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Registration</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('registration')} />
+                                    <label className="text-[0.875rem] font-bold">Registration</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('registration')} />
                                     {keyInfoForm.touched.registration && keyInfoForm.errors.registration ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.registration}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Registration Year</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('registration_year')} />
+                                    <label className="text-[0.875rem] font-bold">Registration Year</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('registration_year')} />
                                     {keyInfoForm.touched.registration_year && keyInfoForm.errors.registration_year ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.registration_year}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Mileage</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('mileage')} />
+                                    <label className="text-[0.875rem] font-bold">Mileage</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('mileage')} />
                                     {keyInfoForm.touched.mileage && keyInfoForm.errors.mileage ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.mileage}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Number of Owners</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('owners')} />
+                                    <label className="text-[0.875rem] font-bold">Number of Owners</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('owners')} />
                                     {keyInfoForm.touched.owners && keyInfoForm.errors.owners ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.owners}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Images</label>
+                                    <label className="text-[0.875rem] font-bold">Images</label>
                                     <input
                                         type="text"
                                         className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none cursor-pointer"
-                                        placeholder="+ add files"
+                                        placeholder="+ Add files"
                                         readOnly
                                         onClick={imageUploadHandler}
                                     />
@@ -246,11 +245,11 @@ const KeyInfoPage = () => {
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.images}</div>
                                     ) : null}
                                 </div>
-                                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4 mr-3" onClick={() => {
+                                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-[1.25rem] font-bold w-32 mt-4 mr-4" onClick={() => {
                                     navigate('/car-listing')
                                     dispatch(reviloActions.reset())
                                 }}>Back</button>
-                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4">Continue</button>
+                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-[1.25rem] font-bold w-32 mt-4">Continue</button>
                             </Form>)}
                     </Formik> : <Formik
                         initialValues={{
@@ -272,60 +271,60 @@ const KeyInfoPage = () => {
                         {({ setFieldValue, ...keyInfoForm }) => (
                             <Form>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Make</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('make')} />
+                                    <label className="text-[0.875rem] font-bold">Make</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('make')} />
                                     {keyInfoForm.touched.make && keyInfoForm.errors.make ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.make}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Model</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('model')} />
+                                    <label className="text-[0.875rem] font-bold">Model</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('model')} />
                                     {keyInfoForm.touched.model && keyInfoForm.errors.model ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.model}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Variant</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('variant')} />
+                                    <label className="text-[0.875rem] font-bold">Variant</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('variant')} />
                                     {keyInfoForm.touched.variant && keyInfoForm.errors.variant ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.variant}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Registration</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('registration')} />
+                                    <label className="text-[0.875rem] font-bold">Registration</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('registration')} />
                                     {keyInfoForm.touched.registration && keyInfoForm.errors.registration ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.registration}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Registration Year</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('registration_year')} />
+                                    <label className="text-[0.875rem] font-bold">Registration Year</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('registration_year')} />
                                     {keyInfoForm.touched.registration_year && keyInfoForm.errors.registration_year ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.registration_year}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Mileage</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('mileage')} />
+                                    <label className="text-[0.875rem] font-bold">Mileage</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('mileage')} />
                                     {keyInfoForm.touched.mileage && keyInfoForm.errors.mileage ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.mileage}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Number of Owners</label>
-                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="enter here..." {...keyInfoForm.getFieldProps('owners')} />
+                                    <label className="text-[0.875rem] font-bold">Number of Owners</label>
+                                    <input type="text" className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none" placeholder="Enter here..." {...keyInfoForm.getFieldProps('owners')} />
                                     {keyInfoForm.touched.owners && keyInfoForm.errors.owners ? (
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.owners}</div>
                                     ) : null}
                                 </div>
                                 <div className="pb-4">
-                                    <label className="text-xs font-bold">Images</label>
+                                    <label className="text-[0.875rem] font-bold">Images</label>
                                     <input
                                         type="text"
                                         className="bg-[#D9D9D9] w-full text-[0.625rem] p-2 border-[0.5px] border-gray-400 outline-none cursor-pointer"
-                                        placeholder="+ add files"
+                                        placeholder="+ Add files"
                                         readOnly
                                         onClick={imageUploadHandler}
                                     />
@@ -348,16 +347,16 @@ const KeyInfoPage = () => {
                                         <div className="text-[0.45rem] text-red-600 pt-0.5">{keyInfoForm.errors.images}</div>
                                     ) : null}
                                 </div>
-                                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4 mr-3" onClick={() => {
+                                <button type="button" className="bg-high-light-color text-white py-2 rounded-full text-[1.25rem] font-bold w-32 mt-4 mr-4" onClick={() => {
                                     navigate('/car-listing')
                                     dispatch(reviloActions.reset())
                                 }}>Back</button>
-                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-xs font-bold w-24 mt-4">Continue</button>
+                                <button type="submit" className="bg-main-color text-white py-2 rounded-full text-[1.25rem] font-bold w-32 mt-4">Continue</button>
                             </Form>)}
                     </Formik>
                 }
             </div>
-            <Footer />
+            <Footer isShow />
         </div>
     )
 }
